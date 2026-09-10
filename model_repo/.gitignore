@@ -1,0 +1,105 @@
+# ========================================
+# SIH26143 — Oil Spill Detection System
+# .gitignore
+# ========================================
+
+# ----- Python -----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+dist/
+build/
+eggs/
+*.whl
+
+# ----- Virtual Environment -----
+venv/
+.venv/
+env/
+.env/
+ENV/
+
+# ----- Environment / Secrets -----
+.env
+*.pem
+*.key
+credentials/
+secrets/
+
+# ----- PyTorch / ML -----
+*.pt
+*.pth
+*.onnx
+*.tflite
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+checkpoints/
+runs/
+wandb/
+mlruns/
+lightning_logs/
+
+# ----- Datasets -----
+data/raw/
+data/interim/
+data/processed/
+data/external/
+*.tif
+*.tiff
+*.nc
+*.nc4
+*.hdf
+*.safe
+*.zip
+*.tar
+*.tar.gz
+*.tar.bz2
+*.7z
+*.rar
+
+# ----- Model weights (keep structure, ignore large files) -----
+models/weights/
+models/checkpoints/
+
+# ----- Generated reports / outputs -----
+reports/evaluation/*.png
+reports/evaluation/*.json
+reports/evaluation/*.csv
+
+# ----- Notebooks checkpoints -----
+.ipynb_checkpoints/
+
+# ----- IDE -----
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ----- OS -----
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ----- Logs -----
+*.log
+logs/
+
+# ----- Coverage / Testing -----
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# ----- Docker (keep config, ignore volumes) -----
+docker-volumes/
+
+# ----- Misc -----
+*.bak
+*.tmp
+*.temp

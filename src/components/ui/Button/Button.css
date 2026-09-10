@@ -1,0 +1,182 @@
+/* ============================================================
+   OceanIntel — Button Component
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1-5);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  line-height: 1;
+  white-space: nowrap;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    box-shadow var(--transition-fast);
+  user-select: none;
+  position: relative;
+  outline: none;
+  text-decoration: none;
+}
+
+.btn:focus-visible {
+  box-shadow: var(--shadow-focus);
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ---- Sizes ---- */
+
+.btn-xs {
+  height: var(--btn-height-xs);
+  padding: 0 var(--space-2);
+  font-size: var(--text-2xs);
+  border-radius: var(--radius-xs);
+}
+
+.btn-sm {
+  height: var(--btn-height-sm);
+  padding: 0 var(--space-3);
+  font-size: var(--text-xs);
+}
+
+.btn-md {
+  height: var(--btn-height-md);
+  padding: 0 var(--space-4);
+  font-size: var(--text-sm);
+}
+
+.btn-lg {
+  height: var(--btn-height-lg);
+  padding: 0 var(--space-5);
+  font-size: var(--text-base);
+}
+
+/* ---- Variants ---- */
+
+/* Primary */
+.btn-primary {
+  background-color: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: #fff;
+}
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--accent-blue-hover);
+  border-color: var(--accent-blue-hover);
+}
+.btn-primary:active:not(:disabled) {
+  background-color: var(--accent-blue-dim);
+  border-color: var(--accent-blue-dim);
+}
+
+/* Secondary */
+.btn-secondary {
+  background-color: var(--surface-elevated);
+  border-color: var(--border-default);
+  color: var(--text-primary);
+}
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--border-subtle);
+  border-color: var(--border-strong);
+}
+.btn-secondary:active:not(:disabled) {
+  background-color: var(--surface-overlay);
+}
+
+/* Ghost */
+.btn-ghost {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--text-secondary);
+}
+.btn-ghost:hover:not(:disabled) {
+  background-color: var(--surface-elevated);
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+}
+.btn-ghost:active:not(:disabled) {
+  background-color: var(--surface-overlay);
+}
+
+/* Danger */
+.btn-danger {
+  background-color: var(--status-critical-dim);
+  border-color: var(--status-critical-border);
+  color: var(--status-critical);
+}
+.btn-danger:hover:not(:disabled) {
+  background-color: var(--status-critical);
+  border-color: var(--status-critical);
+  color: #fff;
+}
+.btn-danger:focus-visible {
+  box-shadow: var(--shadow-focus-danger);
+}
+
+/* Outline */
+.btn-outline {
+  background-color: transparent;
+  border-color: var(--border-default);
+  color: var(--text-primary);
+}
+.btn-outline:hover:not(:disabled) {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+/* Icon-only button */
+.btn-icon {
+  padding: 0;
+  width: var(--btn-height-md);
+  height: var(--btn-height-md);
+  border-radius: var(--radius-sm);
+}
+.btn-icon.btn-sm {
+  width: var(--btn-height-sm);
+  height: var(--btn-height-sm);
+}
+.btn-icon.btn-lg {
+  width: var(--btn-height-lg);
+  height: var(--btn-height-lg);
+}
+
+/* Loading spinner inside button */
+.btn-spinner {
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid currentColor;
+  border-top-color: transparent;
+  border-radius: var(--radius-full);
+  animation: oceanintel-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+/* Button group */
+.btn-group {
+  display: inline-flex;
+  align-items: center;
+}
+.btn-group .btn {
+  border-radius: 0;
+}
+.btn-group .btn:first-child {
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+.btn-group .btn:last-child {
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.btn-group .btn + .btn {
+  border-left: none;
+}

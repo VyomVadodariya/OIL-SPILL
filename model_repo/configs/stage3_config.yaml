@@ -1,0 +1,11 @@
+# Stage 3 - Characterization Engine Configuration
+
+characterization:
+  mask_processing:
+    morph_closing_size: 5       # Fill small holes inside objects (kernel size in pixels, 0 to disable)
+    morph_opening_size: 3       # Remove tiny isolated noise objects (kernel size in pixels, 0 to disable)
+    min_area_pixels: 50         # Discard connected components smaller than this
+    
+  geospatial:
+    default_crs: "EPSG:4326"
+    default_units: "degrees"    # "degrees" or "meters" based on CRS

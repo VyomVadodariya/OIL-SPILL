@@ -1,0 +1,121 @@
+/**
+ * OceanIntel — Reusable Map Controls Stylesheet
+ */
+
+.map-controls {
+  position: absolute;
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  pointer-events: auto;
+  user-select: none;
+}
+
+.map-controls--top-right {
+  top: 12px;
+  right: 12px;
+}
+
+.map-controls--bottom-right {
+  bottom: 24px;
+  right: 12px;
+}
+
+.map-controls--top-left {
+  top: 12px;
+  left: 12px;
+}
+
+.map-controls--bottom-left {
+  bottom: 24px;
+  left: 12px;
+}
+
+.map-control-badge {
+  background: var(--surface-raised);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xs);
+  padding: 3px 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent-blue);
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08);
+}
+
+.map-control-group {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-raised);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xs);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.map-control-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  padding: 0;
+}
+
+.map-control-btn:last-child {
+  border-bottom: none;
+}
+
+.map-control-btn--reset {
+  width: auto;
+  padding: 0 8px;
+  height: 26px;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.map-control-btn--theme {
+  width: auto;
+  padding: 0 8px;
+  height: 28px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xs);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+  font-size: 10px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--accent-blue);
+}
+
+.map-control-reset-text,
+.map-control-theme-text {
+  font-size: 9px;
+  line-height: 1;
+}
+
+.map-control-btn:hover {
+  background: var(--surface-elevated);
+  color: var(--accent-blue);
+}
+
+.map-control-btn:active {
+  background: #e0f2fe;
+}
+
+.map-control-btn:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: -2px;
+}

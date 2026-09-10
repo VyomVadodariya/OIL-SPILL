@@ -1,0 +1,154 @@
+/* ============================================================
+   OceanIntel — Panel Component
+   Side / inline content panels with header, body, footer.
+   ============================================================ */
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* ---- Panel Header ---- */
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: 0 var(--space-4);
+  height: 40px;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.panel-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.panel-header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex-shrink: 0;
+}
+
+.panel-title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.panel-subtitle {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.panel-icon {
+  display: flex;
+  align-items: center;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+/* ---- Panel Body ---- */
+.panel-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.panel-body-padded {
+  padding: var(--space-4);
+}
+
+/* ---- Panel Footer ---- */
+.panel-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+  background-color: var(--surface-raised);
+}
+
+/* ---- Panel Section (within body) ---- */
+.panel-section {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.panel-section:last-child {
+  border-bottom: none;
+}
+
+.panel-section-label {
+  font-size: var(--text-2xs);
+  font-weight: var(--font-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-2);
+}
+
+/* ---- Key-Value Row ---- */
+.kv-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-1-5) 0;
+  font-size: var(--text-xs);
+}
+
+.kv-key {
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  min-width: 80px;
+}
+
+.kv-value {
+  color: var(--text-primary);
+  font-family: var(--font-data);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  word-break: break-all;
+}
+
+.kv-value-mono {
+  font-family: var(--font-mono);
+  color: var(--text-cyan);
+}
+
+/* ---- Collapsible toggle ---- */
+.panel-toggle {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-xs);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color var(--transition-fast), transform var(--transition-base);
+  background: none;
+  border: none;
+  flex-shrink: 0;
+}
+
+.panel-toggle:hover { color: var(--text-primary); }
+
+.panel-toggle-open { transform: rotate(0deg); }
+.panel-toggle-closed { transform: rotate(-90deg); }

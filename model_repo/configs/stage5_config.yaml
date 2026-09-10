@@ -1,0 +1,30 @@
+stage5:
+  # Normalization & Track Segmentation
+  maximum_interpolation_gap_seconds: 14400 # 4 hours
+  minimum_track_observations: 3
+  
+  # Gating (Fast rejection before expensive feature calculation)
+  spatial_search_radius_meters: 50000.0 # 50 km coarse buffer around corridor
+  temporal_tolerance_seconds: 86400 # +/- 24 hours around source window
+  
+  # Candidate Limit
+  max_candidates: 100
+  
+  # Ranking Weights (must sum to 1.0)
+  weights:
+    spatial: 0.40
+    temporal: 0.30
+    track_quality: 0.15
+    behavior: 0.10
+    data_quality: 0.05
+    
+  # Feature Thresholds
+  low_speed_threshold_knots: 1.0 # purely observational
+  corridor_interaction_threshold_meters: 500.0
+  expected_observation_interval_seconds: 300.0 # Expected gap between pings to assess continuity
+  
+  # Geospatial
+  # auto_local calculates the appropriate UTM zone based on geometry centroid
+  metric_crs_strategy: "auto_local" 
+  
+  random_seed: 42

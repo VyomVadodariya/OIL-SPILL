@@ -1,0 +1,160 @@
+/* ============================================================
+   OceanIntel — Table Component
+   Dense, data-rich table for vessel/incident lists.
+   ============================================================ */
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-xs);
+  table-layout: fixed;
+}
+
+/* ---- Header ---- */
+.table thead th {
+  height: 32px;
+  padding: 0 var(--space-3);
+  text-align: left;
+  font-size: var(--text-2xs);
+  font-weight: var(--font-semibold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background-color: var(--surface-raised);
+  border-bottom: 1px solid var(--border-default);
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-raised);
+  user-select: none;
+}
+
+/* Sortable header */
+.th-sortable {
+  cursor: pointer;
+}
+
+.th-sortable:hover {
+  color: var(--text-secondary);
+  background-color: var(--surface-elevated);
+}
+
+.th-sort-icon {
+  display: inline-flex;
+  align-items: center;
+  margin-left: var(--space-1);
+  opacity: 0.4;
+  vertical-align: middle;
+}
+
+.th-sorted .th-sort-icon { opacity: 1; color: var(--accent-blue); }
+.th-sorted { color: var(--text-secondary); }
+
+/* Right-align for numeric columns */
+.th-right, .td-right { text-align: right; }
+.th-center, .td-center { text-align: center; }
+
+/* ---- Body Rows ---- */
+.table tbody tr {
+  height: var(--table-row-height);
+  border-bottom: 1px solid var(--border-faint);
+  transition: background-color var(--transition-fast);
+  cursor: default;
+}
+
+.table tbody tr:last-child { border-bottom: none; }
+
+.table tbody tr:hover {
+  background-color: var(--surface-elevated);
+}
+
+.table tbody tr.row-selected {
+  background-color: var(--accent-blue-muted);
+}
+
+.table tbody tr.row-selected:hover {
+  background-color: rgba(46, 122, 240, 0.2);
+}
+
+.table tbody tr.row-critical {
+  border-left: 2px solid var(--status-critical);
+}
+
+.table tbody tr.row-warning {
+  border-left: 2px solid var(--status-warning);
+}
+
+.table tbody tr.row-nominal {
+  border-left: 2px solid var(--status-nominal);
+}
+
+/* ---- Cells ---- */
+.table tbody td {
+  padding: 0 var(--space-3);
+  color: var(--text-primary);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.td-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.td-coord {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--text-cyan);
+  font-variant-numeric: tabular-nums;
+}
+
+.td-muted { color: var(--text-muted); }
+
+/* ---- Empty State ---- */
+.table-empty {
+  padding: var(--space-10) var(--space-4);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+}
+
+.table-empty-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-2);
+  opacity: 0.3;
+}
+
+/* ---- Toolbar above table ---- */
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+  gap: var(--space-3);
+}
+
+.table-toolbar-left,
+.table-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.table-count {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}

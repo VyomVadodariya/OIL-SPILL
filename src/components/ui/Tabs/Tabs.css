@@ -1,0 +1,142 @@
+/* ============================================================
+   OceanIntel — Tabs Component
+   ============================================================ */
+
+/* ---- Base ---- */
+.tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Tab List ---- */
+.tab-list {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+/* ---- Underline Variant (default) ---- */
+.tabs-underline .tab-list {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.tabs-underline .tab-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  height: var(--tab-height);
+  padding: 0 var(--space-3);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-muted);
+  cursor: pointer;
+  border: none;
+  background: none;
+  white-space: nowrap;
+  transition: color var(--transition-fast);
+  user-select: none;
+  outline: none;
+}
+
+.tabs-underline .tab-item::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: transparent;
+  transition: background-color var(--transition-base);
+}
+
+.tabs-underline .tab-item:hover:not(.tab-active) {
+  color: var(--text-secondary);
+}
+
+.tabs-underline .tab-item.tab-active {
+  color: var(--text-primary);
+}
+
+.tabs-underline .tab-item.tab-active::after {
+  background-color: var(--accent-blue);
+}
+
+/* ---- Segment Variant (pill bar) ---- */
+.tabs-segment .tab-list {
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 3px;
+  gap: 2px;
+  align-items: center;
+  display: inline-flex;
+}
+
+.tabs-segment .tab-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  height: 26px;
+  padding: 0 var(--space-3);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  color: var(--text-muted);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast);
+  user-select: none;
+  outline: none;
+}
+
+.tabs-segment .tab-item:hover:not(.tab-active) {
+  color: var(--text-secondary);
+  background-color: var(--surface-elevated);
+}
+
+.tabs-segment .tab-item.tab-active {
+  background-color: var(--surface-overlay);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-xs);
+  border: 1px solid var(--border-default);
+}
+
+/* ---- Tab Badge count ---- */
+.tab-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: var(--font-semibold);
+  font-variant-numeric: tabular-nums;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: var(--radius-full);
+  background-color: var(--surface-elevated);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  line-height: 1;
+}
+
+.tab-active .tab-count {
+  background-color: var(--accent-blue-muted);
+  color: var(--accent-blue-hover);
+  border-color: rgba(46, 122, 240, 0.25);
+}
+
+/* ---- Tab Panel ---- */
+.tab-panel {
+  flex: 1;
+  outline: none;
+}
+
+.tab-panel:not(.tab-panel-active) {
+  display: none;
+}

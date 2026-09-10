@@ -1,0 +1,27 @@
+model:
+  path: "models/best_model.pth"
+  encoder_name: "resnet34"
+  in_channels: 1
+  classes: 1
+
+inference:
+  device: "cuda"
+  tile_size: 256
+  stride: 128
+  batch_size: 16
+
+preprocessing:
+  db_min: -45.0
+  db_max: 20.0
+
+postprocessing:
+  threshold: 0.5
+  opening_kernel: 3
+  closing_kernel: 3
+  min_component_pixels: 10
+
+output:
+  save_probability: false
+  save_mask: true
+  save_geojson: true
+  output_dir: "data/processed/inference_outputs"

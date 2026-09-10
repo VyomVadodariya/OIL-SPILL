@@ -1,0 +1,27 @@
+stage6:
+  weights:
+    drift: 0.35
+    temporal: 0.25
+    spatial: 0.20
+    behavior: 0.10
+    track_quality: 0.10
+    
+  classification_thresholds:
+    high_priority: 0.80
+    strongly_compatible: 0.65
+    moderately_compatible: 0.45
+    weakly_compatible: 0.25
+    insufficient_evidence: 0.10
+    # < 0.10 -> NO_EVIDENCE
+    
+  source_type_criteria:
+    min_completeness_for_vessel: 0.50
+    
+  reliability_priors:
+    spatial: 0.90
+    temporal: 0.90
+    drift: 0.80
+    behavior: 0.70
+    track_quality: 1.00
+    
+  random_seed: 42

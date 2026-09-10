@@ -1,0 +1,83 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sih26143-oil-spill"
+version = "0.1.0"
+description = "SIH26143 — Leveraging satellite imagery to determine oil spills at sea along with AIS data correlations to identify vessel responsible for the spill"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "Proprietary"}
+
+dependencies = [
+    # --- Core ML ---
+    "torch>=2.9.0",
+    "torchvision>=0.24.0",
+    "segmentation-models-pytorch>=0.4.0",
+    "albumentations>=2.0.0",
+    "numpy>=2.0.0",
+    "scipy>=1.14.0",
+    "pandas>=2.2.0",
+    "scikit-learn>=1.5.0",
+
+    # --- Computer Vision ---
+    "opencv-python>=4.10.0",
+    "pillow>=11.0.0",
+
+    # --- Geospatial ---
+    "rasterio>=1.4.0",
+    "geopandas>=1.0.0",
+    "shapely>=2.0.0",
+    "pyproj>=3.7.0",
+    "fiona>=1.10.0",
+
+    # --- Visualization ---
+    "matplotlib>=3.9.0",
+    "seaborn>=0.13.0",
+
+    # --- Web / API ---
+    "fastapi>=0.110.0",
+    "uvicorn>=0.30.0",
+    "pydantic>=2.9.0",
+    "pydantic-settings>=2.5.0",
+
+    # --- Utils ---
+    "python-dotenv>=1.0.0",
+    "tqdm>=4.66.0",
+    "requests>=2.32.0",
+    "pyyaml>=6.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9.0.0",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.8.0",
+]
+ocean = [
+    "xarray>=2024.10.0",
+    "netCDF4>=1.7.0",
+]
+maps = [
+    "folium>=0.18.0",
+    "plotly>=6.0.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]

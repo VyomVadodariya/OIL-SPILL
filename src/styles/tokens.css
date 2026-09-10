@@ -1,0 +1,412 @@
+/* ============================================================
+   OceanIntel — Design Tokens
+   All CSS custom properties live here.
+   ============================================================ */
+
+:root,
+[data-theme="light"] {
+
+  /* ----------------------------------------------------------
+     COLOR — Surface Hierarchy (Professional Light Enterprise)
+     Background layers from deepest to most elevated.
+  ---------------------------------------------------------- */
+  --surface-void:     #edf2f7;   /* subtle backdrop / map canvas */
+  --surface-base:     #f5f7fa;   /* primary application background */
+  --surface-raised:   #ffffff;   /* panels, sidebars, main cards */
+  --surface-overlay:  #ffffff;   /* tables, popovers, dropdowns */
+  --surface-elevated: #f1f5f9;   /* hover states, selected rows, chips */
+  --surface-tooltip:  #0f172a;   /* high-contrast dark tooltip for maximum legibility */
+
+  /* ----------------------------------------------------------
+     COLOR — Borders
+  ---------------------------------------------------------- */
+  --border-faint:   rgba(15, 23, 42, 0.04);
+  --border-subtle:  #e2e8f0;
+  --border-default: #cbd5e1;
+  --border-strong:  #94a3b8;
+  --border-focus:   #0284c7;
+
+  /* ----------------------------------------------------------
+     COLOR — Accent (Deep Ocean Blue / Teal)
+  ---------------------------------------------------------- */
+  --accent-blue:        #0284c7;   /* deep ocean blue */
+  --accent-blue-dim:    #0369a1;
+  --accent-blue-hover:  #0284c7;
+  --accent-blue-muted:  #f0f9ff;   /* soft sky tint */
+  --accent-blue-glow:   rgba(2, 132, 199, 0.12);
+
+  --accent-cyan:        #0d9488;   /* restrained ocean teal */
+  --accent-cyan-dim:    #0f766e;
+  --accent-cyan-hover:  #14b8a6;
+  --accent-cyan-muted:  #f0fdfa;
+
+  /* Aliases used across page stylesheets */
+  --cyan-primary:       #0284c7;
+  --border-cyan:        #bae6fd;
+
+  /* ----------------------------------------------------------
+     COLOR — Text (High Contrast Slate Hierarchy)
+  ---------------------------------------------------------- */
+  --text-primary:   #0f172a;   /* headlines, primary values, dark navy */
+  --text-secondary: #475569;   /* supporting text, metadata */
+  --text-muted:     #64748b;   /* placeholder, small labels */
+  --text-inverse:   #ffffff;   /* text on dark buttons/tooltips */
+  --text-accent:    #0284c7;
+  --text-cyan:      #0d9488;
+  --text-link:      #0369a1;
+
+  /* ----------------------------------------------------------
+     COLOR — Status / Severity (Muted Professional Enterprise)
+  ---------------------------------------------------------- */
+  --status-critical:        #dc2626;
+  --status-critical-dim:    #fef2f2;
+  --status-critical-border: #fecaca;
+
+  --status-warning:         #d97706;
+  --status-warning-dim:     #fffbeb;
+  --status-warning-border:  #fde68a;
+
+  --status-caution:         #b45309;
+  --status-caution-dim:     #fef3c7;
+
+  --status-nominal:         #16a34a;
+  --status-nominal-dim:     #f0fdf4;
+  --status-nominal-border:  #bbf7d0;
+
+  --status-info:            #0284c7;
+  --status-info-dim:        #f0f9ff;
+
+  --status-inactive:        #64748b;
+  --status-inactive-dim:    #f1f5f9;
+
+  --status-unknown:         #94a3b8;
+
+  /* ----------------------------------------------------------
+     COLOR — Map Overlay Palette (High Contrast on Light Basemap)
+     Oil: High-contrast Orange | Vessel: Ocean Blue | Drift: Teal
+  ---------------------------------------------------------- */
+  --map-spill-fill:        rgba(234, 88, 12, 0.35);
+  --map-spill-stroke:      #ea580c;
+  --map-spill-inner:       rgba(234, 88, 12, 0.55);
+  --map-spill-glow:        rgba(234, 88, 12, 0.16);
+
+  --map-trajectory:        rgba(13, 148, 136, 0.75);
+  --map-trajectory-past:   rgba(217, 119, 6, 0.65);
+
+  --map-vessel-highest-ranked: #dc2626;
+  --map-vessel-under-review:   #d97706;
+  --map-vessel-monitored:      #0284c7;
+  --map-vessel-cleared:        #16a34a;
+  --map-vessel-unknown:        #64748b;
+
+  --map-exclusion-zone:    rgba(217, 119, 6, 0.10);
+  --map-exclusion-border:  rgba(217, 119, 6, 0.60);
+
+  --map-impact-zone:       rgba(220, 38, 38, 0.08);
+  --map-impact-border:     rgba(220, 38, 38, 0.45);
+
+  --map-wind-arrow:        #0d9488;
+  --map-current-arrow:     #0284c7;
+
+  --map-grid:              rgba(15, 23, 42, 0.06);
+  --map-graticule:         rgba(15, 23, 42, 0.12);
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY (Increased readability scale)
+  ---------------------------------------------------------- */
+  --font-sans:  'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono:  'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  --font-data:  'JetBrains Mono', monospace;  /* numeric data readouts */
+
+  --text-2xs:  11px;
+  --text-xs:   12px;
+  --text-sm:   13px;
+  --text-base: 14px;
+  --text-md:   15px;
+  --text-lg:   17px;
+  --text-xl:   19px;
+  --text-2xl:  24px;
+  --text-3xl:  32px;
+  --text-4xl:  38px;
+
+  --leading-none:   1;
+  --leading-tight:  1.2;
+  --leading-snug:   1.35;
+  --leading-normal: 1.5;
+  --leading-loose:  1.7;
+
+  --tracking-tight:  -0.02em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.04em;
+  --tracking-wider:   0.08em;
+  --tracking-widest:  0.14em;
+
+  --font-light:    300;
+  --font-regular:  400;
+  --font-medium:   500;
+  --font-semibold: 600;
+  --font-bold:     700;
+
+  /* ----------------------------------------------------------
+     SPACING
+  ---------------------------------------------------------- */
+  --space-0:    0;
+  --space-0-5:  2px;
+  --space-1:    4px;
+  --space-1-5:  6px;
+  --space-2:    8px;
+  --space-3:    12px;
+  --space-4:    16px;
+  --space-5:    20px;
+  --space-6:    24px;
+  --space-8:    32px;
+  --space-10:   40px;
+  --space-12:   48px;
+  --space-16:   64px;
+  --space-20:   80px;
+  --space-24:   96px;
+
+  /* ----------------------------------------------------------
+     BORDER RADIUS
+     Intentionally restrained — this is a technical tool (6–8px).
+  ---------------------------------------------------------- */
+  --radius-none:  0;
+  --radius-xs:    2px;
+  --radius-sm:    4px;
+  --radius-md:    6px;
+  --radius-lg:    8px;
+  --radius-xl:    10px;
+  --radius-full:  9999px;
+
+  /* ----------------------------------------------------------
+     SHADOWS
+     Extremely subtle, soft enterprise elevations.
+     Borders first, subtle shadows second.
+  ---------------------------------------------------------- */
+  --shadow-none: none;
+  --shadow-xs:   0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-sm:   0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md:   0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+  --shadow-lg:   0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+  --shadow-xl:   0 20px 25px -5px rgba(15, 23, 42, 0.09), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
+  --shadow-inset: inset 0 1px 2px rgba(15, 23, 42, 0.06);
+
+  /* Focus ring */
+  --shadow-focus: 0 0 0 2px rgba(2, 132, 199, 0.25);
+  --shadow-focus-danger: 0 0 0 2px rgba(220, 38, 38, 0.25);
+
+  /* ----------------------------------------------------------
+     TRANSITIONS
+  ---------------------------------------------------------- */
+  --transition-fast:   80ms ease;
+  --transition-base:   150ms ease;
+  --transition-slow:   250ms ease;
+  --transition-slower: 400ms ease;
+
+  /* ----------------------------------------------------------
+     Z-INDEX SCALE
+  ---------------------------------------------------------- */
+  --z-base:      0;
+  --z-raised:    10;
+  --z-dropdown:  100;
+  --z-sticky:    200;
+  --z-drawer:    300;
+  --z-modal:     400;
+  --z-tooltip:   500;
+  --z-toast:     600;
+
+  /* ----------------------------------------------------------
+     LAYOUT
+  ---------------------------------------------------------- */
+  --sidebar-width:       240px;
+  --sidebar-collapsed:   56px;
+  --topbar-height:       48px;
+  --panel-width:         320px;
+  --panel-width-lg:      420px;
+
+  /* ----------------------------------------------------------
+     COMPONENT — Specific tokens
+  ---------------------------------------------------------- */
+  --input-height-sm:  28px;
+  --input-height-md:  32px;
+  --input-height-lg:  38px;
+
+  --btn-height-xs:  24px;
+  --btn-height-sm:  28px;
+  --btn-height-md:  32px;
+  --btn-height-lg:  38px;
+
+  --table-row-height: 36px;
+  --tab-height:       36px;
+}
+
+/* ============================================================
+   DARK THEME PALETTE
+   Activated via [data-theme="dark"] attribute on root/html
+   ============================================================ */
+[data-theme="dark"] {
+  /* ----------------------------------------------------------
+     COLOR — Surface Hierarchy (Professional Dark Intelligence)
+  ---------------------------------------------------------- */
+  --surface-void:     #050811;   /* deep maritime void / canvas */
+  --surface-base:     #0a0f1d;   /* primary dark application background */
+  --surface-raised:   #0e1726;   /* panels, sidebars, main cards */
+  --surface-overlay:  #142036;   /* tables, popovers, dropdowns */
+  --surface-elevated: #1a2942;   /* hover states, selected rows, chips */
+  --surface-tooltip:  #020617;   /* high-contrast black tooltip */
+
+  /* ----------------------------------------------------------
+     COLOR — Borders
+  ---------------------------------------------------------- */
+  --border-faint:   rgba(255, 255, 255, 0.05);
+  --border-subtle:  #1e293b;
+  --border-default: #334155;
+  --border-strong:  #475569;
+  --border-focus:   #38bdf8;
+
+  /* ----------------------------------------------------------
+     COLOR — Accent (Electric Cyan / Vivid Oceanic Blue)
+  ---------------------------------------------------------- */
+  --accent-blue:        #38bdf8;
+  --accent-blue-dim:    #0284c7;
+  --accent-blue-hover:  #7dd3fc;
+  --accent-blue-muted:  rgba(56, 189, 248, 0.12);
+  --accent-blue-glow:   rgba(56, 189, 248, 0.25);
+
+  --accent-cyan:        #2dd4bf;
+  --accent-cyan-dim:    #0d9488;
+  --accent-cyan-hover:  #5eead4;
+  --accent-cyan-muted:  rgba(45, 212, 191, 0.12);
+
+  --cyan-primary:       #38bdf8;
+  --border-cyan:        rgba(56, 189, 248, 0.35);
+
+  /* ----------------------------------------------------------
+     COLOR — Text (Crisp Dark Mode Contrast Hierarchy)
+  ---------------------------------------------------------- */
+  --text-primary:   #f8fafc;   /* pure high-contrast slate white */
+  --text-secondary: #94a3b8;   /* slate supporting text */
+  --text-muted:     #64748b;   /* muted metadata */
+  --text-inverse:   #0f172a;
+  --text-accent:    #38bdf8;
+  --text-cyan:      #2dd4bf;
+  --text-link:      #38bdf8;
+
+  /* ----------------------------------------------------------
+     COLOR — Status / Severity
+  ---------------------------------------------------------- */
+  --status-critical:        #f87171;
+  --status-critical-dim:    rgba(239, 68, 68, 0.18);
+  --status-critical-border: rgba(239, 68, 68, 0.35);
+
+  --status-warning:         #fbbf24;
+  --status-warning-dim:     rgba(245, 158, 11, 0.18);
+  --status-warning-border:  rgba(245, 158, 11, 0.35);
+
+  --status-caution:         #f59e0b;
+  --status-caution-dim:     rgba(217, 119, 6, 0.18);
+
+  --status-nominal:         #34d399;
+  --status-nominal-dim:     rgba(16, 185, 129, 0.18);
+  --status-nominal-border:  rgba(16, 185, 129, 0.35);
+
+  --status-info:            #38bdf8;
+  --status-info-dim:        rgba(56, 189, 248, 0.18);
+
+  --status-inactive:        #64748b;
+  --status-inactive-dim:    rgba(100, 116, 139, 0.18);
+
+  --status-unknown:         #475569;
+
+  /* ----------------------------------------------------------
+     COLOR — Map Overlay Palette (Dark Basemap Adaptation)
+  ---------------------------------------------------------- */
+  --map-spill-fill:        rgba(249, 115, 22, 0.45);
+  --map-spill-stroke:      #f97316;
+  --map-spill-inner:       rgba(249, 115, 22, 0.70);
+  --map-spill-glow:        rgba(249, 115, 22, 0.30);
+
+  --map-trajectory:        rgba(45, 212, 191, 0.85);
+  --map-trajectory-past:   rgba(251, 191, 36, 0.75);
+
+  --map-vessel-highest-ranked: #f87171;
+  --map-vessel-under-review:   #fbbf24;
+  --map-vessel-monitored:      #38bdf8;
+  --map-vessel-cleared:        #34d399;
+  --map-vessel-unknown:        #64748b;
+
+  --map-exclusion-zone:    rgba(251, 191, 36, 0.12);
+  --map-exclusion-border:  rgba(251, 191, 36, 0.65);
+
+  --map-impact-zone:       rgba(248, 113, 113, 0.12);
+  --map-impact-border:     rgba(248, 113, 113, 0.55);
+
+  --map-wind-arrow:        #2dd4bf;
+  --map-current-arrow:     #38bdf8;
+
+  --map-grid:              rgba(255, 255, 255, 0.05);
+  --map-graticule:         rgba(255, 255, 255, 0.08);
+
+  /* ----------------------------------------------------------
+     SHADOWS (Dark Elevation)
+  ---------------------------------------------------------- */
+  --shadow-xs:   0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm:   0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md:   0 4px 6px -1px rgba(0, 0, 0, 0.6), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+  --shadow-lg:   0 10px 15px -3px rgba(0, 0, 0, 0.7), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+  --shadow-xl:   0 20px 25px -5px rgba(0, 0, 0, 0.8), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+  --shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+
+  --shadow-focus: 0 0 0 2px rgba(56, 189, 248, 0.35);
+  --shadow-focus-danger: 0 0 0 2px rgba(248, 113, 113, 0.35);
+}
+
+/* ============================================================
+   SVG CARTOGRAPHY THEME ADAPTATION
+   ============================================================ */
+[data-theme="dark"] #oceanGrad stop:nth-child(1),
+[data-theme="dark"] #invOcean stop:nth-child(1),
+[data-theme="dark"] #histOcean stop:nth-child(1),
+[data-theme="dark"] #driftOcean stop:nth-child(1),
+[data-theme="dark"] #envOcean stop:nth-child(1),
+[data-theme="dark"] #respOcean stop:nth-child(1),
+[data-theme="dark"] #aisOcean stop:nth-child(1),
+[data-theme="dark"] #spillBg stop:nth-child(1),
+[data-theme="dark"] #rawOceanGrad stop:nth-child(1),
+[data-theme="dark"] #prepOceanGrad stop:nth-child(1) {
+  stop-color: #030814;
+}
+
+[data-theme="dark"] #oceanGrad stop:nth-child(2),
+[data-theme="dark"] #invOcean stop:nth-child(2),
+[data-theme="dark"] #histOcean stop:nth-child(2),
+[data-theme="dark"] #driftOcean stop:nth-child(2),
+[data-theme="dark"] #envOcean stop:nth-child(2),
+[data-theme="dark"] #respOcean stop:nth-child(2),
+[data-theme="dark"] #aisOcean stop:nth-child(2),
+[data-theme="dark"] #spillBg stop:nth-child(2),
+[data-theme="dark"] #rawOceanGrad stop:nth-child(2),
+[data-theme="dark"] #prepOceanGrad stop:nth-child(2) {
+  stop-color: #061124;
+}
+
+[data-theme="dark"] #oceanGrad stop:nth-child(3),
+[data-theme="dark"] #invOcean stop:nth-child(3),
+[data-theme="dark"] #histOcean stop:nth-child(3),
+[data-theme="dark"] #driftOcean stop:nth-child(3),
+[data-theme="dark"] #envOcean stop:nth-child(3),
+[data-theme="dark"] #respOcean stop:nth-child(3),
+[data-theme="dark"] #aisOcean stop:nth-child(3),
+[data-theme="dark"] #spillBg stop:nth-child(3),
+[data-theme="dark"] #rawOceanGrad stop:nth-child(3),
+[data-theme="dark"] #prepOceanGrad stop:nth-child(3) {
+  stop-color: #0a1733;
+}
+
+[data-theme="dark"] svg path[fill="#e2e8f0"],
+[data-theme="dark"] svg path[fill="#cbd5e1"] {
+  fill: #0f172a;
+}
+[data-theme="dark"] svg path[stroke="#94a3b8"] {
+  stroke: #1e3a5f;
+}

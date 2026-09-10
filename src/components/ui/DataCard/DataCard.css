@@ -1,0 +1,139 @@
+/* ============================================================
+   OceanIntel — DataCard Component
+   Metric/KPI card for displaying operational data.
+   ============================================================ */
+
+.data-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1-5);
+  padding: var(--space-4);
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.data-card:hover {
+  border-color: var(--border-default);
+}
+
+/* Left accent stripe — severity color */
+.data-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  border-radius: var(--radius-xs) 0 0 var(--radius-xs);
+  background-color: transparent;
+  transition: background-color var(--transition-base);
+}
+
+.data-card-critical::before  { background-color: var(--status-critical); }
+.data-card-warning::before   { background-color: var(--status-warning); }
+.data-card-nominal::before   { background-color: var(--status-nominal); }
+.data-card-info::before      { background-color: var(--accent-blue); }
+.data-card-cyan::before      { background-color: var(--accent-cyan); }
+
+/* ---- Card Header ---- */
+.data-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.data-card-label {
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  color: var(--text-secondary);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.data-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-elevated);
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* ---- Primary Value ---- */
+.data-card-value {
+  font-family: var(--font-data);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  line-height: var(--leading-none);
+  letter-spacing: var(--tracking-tight);
+  font-variant-numeric: tabular-nums;
+}
+
+.data-card-unit {
+  font-size: var(--text-sm);
+  font-weight: var(--font-regular);
+  color: var(--text-secondary);
+  margin-left: var(--space-0-5);
+}
+
+/* ---- Footer / Delta ---- */
+.data-card-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-0-5);
+}
+
+.data-card-delta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-0-5);
+  font-size: var(--text-xs);
+  font-family: var(--font-data);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--font-medium);
+}
+
+.data-card-delta-up   { color: var(--status-critical); }
+.data-card-delta-down { color: var(--status-nominal); }
+.data-card-delta-flat { color: var(--text-muted); }
+
+.data-card-sublabel {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+/* ---- Compact variant ---- */
+.data-card-compact {
+  padding: var(--space-3);
+  gap: var(--space-1);
+}
+
+.data-card-compact .data-card-value {
+  font-size: var(--text-xl);
+}
+
+/* ---- Skeleton state ---- */
+.data-card-skeleton .data-card-value {
+  width: 80px;
+  height: 28px;
+  border-radius: var(--radius-xs);
+  background: linear-gradient(
+    90deg,
+    var(--surface-raised) 0%,
+    var(--surface-elevated) 50%,
+    var(--surface-raised) 100%
+  );
+  background-size: 800px 100%;
+  animation: oceanintel-shimmer 1.5s linear infinite;
+}

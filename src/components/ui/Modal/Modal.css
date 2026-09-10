@@ -1,0 +1,169 @@
+/* ============================================================
+   OceanIntel — Modal & Drawer Components
+   ============================================================ */
+
+/* ---- Overlay ---- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(3px);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  animation: oceanintel-fade-in 150ms ease both;
+}
+
+/* ---- Modal Box ---- */
+.modal {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface-overlay);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  width: 100%;
+  max-height: calc(100vh - 80px);
+  overflow: hidden;
+  animation: oceanintel-scale-in 150ms ease both;
+  position: relative;
+}
+
+.modal-sm  { max-width: 400px; }
+.modal-md  { max-width: 560px; }
+.modal-lg  { max-width: 760px; }
+.modal-xl  { max-width: 960px; }
+.modal-full { max-width: calc(100vw - 80px); }
+
+/* ---- Modal Header ---- */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+  gap: var(--space-3);
+}
+
+.modal-title {
+  font-size: var(--text-md);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+}
+
+.modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.modal-close:hover {
+  color: var(--text-primary);
+  background-color: var(--surface-elevated);
+}
+
+/* ---- Modal Body ---- */
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-5);
+}
+
+/* ---- Modal Footer ---- */
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   DRAWER
+   ============================================================ */
+
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.40);
+  backdrop-filter: blur(2px);
+  z-index: var(--z-drawer);
+  animation: oceanintel-fade-in 150ms ease both;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border-default);
+  box-shadow: var(--shadow-xl);
+  z-index: var(--z-drawer);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.drawer-right {
+  right: 0;
+  border-right: none;
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  animation: oceanintel-slide-in-right 200ms ease both;
+}
+
+.drawer-left {
+  left: 0;
+  border-left: none;
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  animation: oceanintel-slide-in-left 200ms ease both;
+}
+
+.drawer-sm  { width: 320px; }
+.drawer-md  { width: 420px; }
+.drawer-lg  { width: 560px; }
+.drawer-xl  { width: 720px; }
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.drawer-title {
+  font-size: var(--text-md);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+}
+
+.drawer-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.drawer-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
