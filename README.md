@@ -159,17 +159,6 @@ pytest
 
 ---
 
-## Limitations
-
-- **SAR Look-Alikes:** Low-wind areas (< 3 m/s), biogenic algal films, and internal waves produce dark backscatter signatures that can trigger false alarms without auxiliary metocean gating.
-- **Binary Detection:** Current model performs binary segmentation; it does not classify oil thickness, crude vs. refined products, or segment ships/land at the pixel level.
-- **Simulated Environmental Forcing:** Particle drift currently uses synthetic velocity fields; operational CMEMS and ERA5 integration is planned but not connected.
-- **AIS Telemetry:** Historical AIS operates via offline CSV files; live WebSocket streaming and REST querying remain skeleton stubs.
-- **Geographic Generalization:** Trained on Gulf of Mexico imagery; performance across Indian coastal waters requires independent ground-truth validation.
-- **Deterministic Scoring:** The Investigation Score is an engineering metric based on heuristic weights, not a calibrated legal probability.
-
----
-
 ## References
 
 - **Data Platforms:** [Copernicus Sentinel-1](https://sentinels.copernicus.eu/web/sentinel/missions/sentinel-1) · [Copernicus Marine Service (CMEMS)](https://marine.copernicus.eu/) · [ECMWF ERA5 Reanalysis](https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5)
