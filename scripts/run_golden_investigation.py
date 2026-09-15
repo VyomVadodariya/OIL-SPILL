@@ -195,6 +195,14 @@ def run_investigation():
         "environmental_forcing": compute_sha256("data/demo_case/environmental/forcing.json")
     }
     
+    # Embed spill info in final_result provenance for frontend
+    final_result.provenance["spill_info"] = {
+        "area_km2": detection.area_km2,
+        "centroid_lat": detection.geo_centroid.latitude,
+        "centroid_lon": detection.geo_centroid.longitude,
+        "geometry_wkt": detection.geometry.wkt if hasattr(detection.geometry, 'wkt') else str(detection.geometry)
+    }
+    
     # Save output for frontend
     out_dir = Path("data/demo_case/investigation")
     out_dir.mkdir(parents=True, exist_ok=True)

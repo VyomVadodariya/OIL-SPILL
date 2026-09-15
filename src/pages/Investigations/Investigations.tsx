@@ -5,10 +5,9 @@
  * Language follows OceanIntel terminology guidelines — see inline comments.
  */
 
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { AlertTriangle } from 'lucide-react';
 import { InvestigationMap, type InvVesselMark, type VesselStatus } from './InvestigationMap';
-import { DEMO_CANDIDATES } from '../../data/demo/incident';
 import { DataStatusBadge } from '../../components/common/DataStatusBadge';
 import './Investigations.css';
 
@@ -29,6 +28,7 @@ interface Vessel extends InvVesselMark {
   temporalScore?: number;
   driftScore?: number;
   aisContinuity?: 'high' | 'moderate' | 'low';
+  evidenceItems?: { text: string; weight: string; level: string }[];
 }
 
 /* Layer config */
@@ -54,82 +54,53 @@ interface Stage {
 const STAGES: Stage[] = [
   {
     id: 's1',  label: 'SAR Detection',      shortLabel: 'SAR',
-    detail: 'Sentinel-1A ascending pass — surface anomaly detected at 06:12 UTC, 2026-09-07. Scene footprint: 250×160 km.',
+    detail: 'Synthetic Aperture Radar anomaly detected and footprint extracted.',
     status: 'done',
   },
   {
     id: 's2',  label: 'Oil Segmentation',   shortLabel: 'Segmentation',
-    detail: 'NRCS-based threshold segmentation isolated 42.7 km² hydrocarbon signature from background clutter. Quality Score: 92/100.',
+    detail: 'Neural network segmentation isolated hydrocarbon signature from background clutter.',
     status: 'done',
   },
   {
     id: 's3',  label: 'Spill Characterization', shortLabel: 'Characterization',
-    detail: 'Elongation 2.8:1 · Orientation N 18° W · Estimated volume 4,820 bbl · Weathering state: fresh-intermediate.',
+    detail: 'Geometry, area, and orientation extracted from segmentation mask.',
     status: 'done',
   },
   {
     id: 's4',  label: 'Backward Drift',     shortLabel: 'Bwd. Drift',
-    detail: 'CMEMS current reanalysis + ECMWF ERA5 wind. Source window modelled to 2026-09-07 02:00–04:00 UTC (±1h uncertainty).',
+    detail: 'Modelled using environmental forcing. Source window and origin inferred.',
     status: 'done',
   },
   {
     id: 's5',  label: 'Source Corridor',    shortLabel: 'Corridor',
-    detail: 'Probable release corridor: 28.38°–28.52°N / 52.10°–52.25°E. Area 28 km².',
+    detail: 'Probable release corridor polygon generated.',
     status: 'done',
   },
   {
     id: 's6',  label: 'AIS Reconstruction', shortLabel: 'AIS Recon.',
-    detail: '5 vessels observed transiting the source corridor within the modelled release window. Data from MarineTraffic historic AIS.',
+    detail: 'Vessels observed transiting the source corridor within the modelled release window.',
     status: 'done',
   },
   {
     id: 's7',  label: 'Candidate Ranking',  shortLabel: 'Ranking',
-    detail: 'Multi-factor scoring applied: spatial, temporal, drift, AIS continuity. HARBOR PIONEER ranked first (Score 87/100).',
+    detail: 'Multi-factor scoring applied to investigation candidates.',
     status: 'done',
   },
   {
     id: 's8',  label: 'Evidence Analysis',  shortLabel: 'Evidence',
-    detail: 'Cross-correlation of spill geometry, vessel track, cargo grade, and AIS observation gap. Evidence is compatible with investigation hypothesis.',
+    detail: 'Cross-correlation of spill geometry and vessel tracks. Evidence dynamically computed.',
     status: 'active',
   },
   {
     id: 's9',  label: 'Forward Drift',      shortLabel: 'Fwd. Drift',
-    detail: 'Modelled trajectory indicates potential exposure to sensitive zones, subject to uncertainty. 72h outlook computed.',
+    detail: 'Modelled trajectory indicates potential exposure zones subject to uncertainty.',
     status: 'pending',
   },
   {
     id: 's10', label: 'Environmental Exposure', shortLabel: 'Exposure',
-    detail: '3 sensitive marine zones observed within 72h drift corridor. Modelled trajectory indicates potential exposure, subject to uncertainty.',
+    detail: 'Sensitive marine zones evaluated for potential exposure.',
     status: 'pending',
-  },
-];
-
-/* Evidence items */
-const EVIDENCE = [
-  {
-    text: 'SAR detection window coincides with AIS observation gap period for vessel.',
-    weight: 'Strong',
-    level: 'strong',
-  },
-  {
-    text: 'Vessel\'s last known position intersects backward drift source corridor.',
-    weight: 'Strong',
-    level: 'strong',
-  },
-  {
-    text: 'Vessel heading and speed consistent with modelled spill origin trajectory.',
-    weight: 'Moderate',
-    level: 'moderate',
-  },
-  {
-    text: 'Vessel previously transited the same route on two prior occasions.',
-    weight: 'Circumstantial',
-    level: 'circumstantial',
-  },
-  {
-    text: 'Spill oil composition is consistent with vessel\'s declared cargo grade.',
-    weight: 'Moderate',
-    level: 'moderate',
   },
 ];
 
@@ -173,9 +144,9 @@ const CompatBar: React.FC<{ label: string; score: number }> = ({ label, score })
 };
 
 /* ---- Right intelligence panel ---- */
-interface RightPanelProps { vessel: Vessel }
+interface RightPanelProps { vessel: Vessel; spillInfo?: any; }
 
-const RightPanel: React.FC<RightPanelProps> = ({ vessel }) => {
+const RightPanel: React.FC<RightPanelProps> = ({ vessel, spillInfo }) => {
   const hasScores = vessel.invScore != null;
 
   return (
@@ -210,32 +181,23 @@ const RightPanel: React.FC<RightPanelProps> = ({ vessel }) => {
 
             <div className="inv-kv">
               <span className="inv-kv-label">Spill Area</span>
-              <span className="inv-kv-value inv-kv-value--primary">42.7 km²</span>
+              <span className="inv-kv-value inv-kv-value--primary">
+                {spillInfo && spillInfo.area_km2 ? `${spillInfo.area_km2.toFixed(2)} km²` : 'Not available'}
+              </span>
             </div>
 
             <div className="inv-kv">
               <span className="inv-kv-label">Centroid</span>
-              <span className="inv-kv-value inv-kv-value--mono">26°09′N · 051°48′E</span>
-            </div>
-
-            <div className="inv-kv">
-              <span className="inv-kv-label">Elongation</span>
-              <span className="inv-kv-value">2.8 : 1</span>
-            </div>
-
-            <div className="inv-kv">
-              <span className="inv-kv-label">Orientation</span>
-              <span className="inv-kv-value">N 18° W</span>
+              <span className="inv-kv-value inv-kv-value--mono">
+                {spillInfo && spillInfo.centroid_lat != null && spillInfo.centroid_lon != null 
+                  ? `${spillInfo.centroid_lat.toFixed(4)}°N · ${spillInfo.centroid_lon.toFixed(4)}°E` 
+                  : 'Not available'}
+              </span>
             </div>
 
             <div className="inv-kv">
               <span className="inv-kv-label">Sensor</span>
-              <span className="inv-kv-value">Sentinel-1A · IW · VV</span>
-            </div>
-
-            <div className="inv-kv">
-              <span className="inv-kv-label">Detected</span>
-              <span className="inv-kv-value inv-kv-value--mono">2026-09-07 06:12 UTC</span>
+              <span className="inv-kv-value">Sentinel-1A</span>
             </div>
 
           </div>
@@ -324,7 +286,6 @@ const RightPanel: React.FC<RightPanelProps> = ({ vessel }) => {
 
         {/* ========================================
             SECTION 3 — Evidence
-            LANGUAGE: "Evidence is compatible with investigation hypothesis."
             ======================================== */}
         <div className="inv-section">
           <div className="inv-section-header">
@@ -334,7 +295,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ vessel }) => {
           <div className="inv-section-body">
 
             <div className="inv-evidence-list">
-              {EVIDENCE.map((ev, i) => (
+              {vessel.evidenceItems?.map((ev, i) => (
                 <div key={i} className="inv-evidence-item">
                   <div className={`inv-evidence-icon inv-evidence-icon--${ev.level}`}
                        aria-hidden="true">
@@ -346,13 +307,14 @@ const RightPanel: React.FC<RightPanelProps> = ({ vessel }) => {
                   </div>
                 </div>
               ))}
+              {(!vessel.evidenceItems || vessel.evidenceItems.length === 0) && (
+                <div style={{ color: 'var(--text-muted)' }}>No specific evidence available.</div>
+              )}
             </div>
 
             {/* Mandatory scientific disclaimer statement */}
             <div className="inv-evidence-stmt">
-              Evidence is compatible with investigation hypothesis.
-              Findings support further formal investigation. No legal determination
-              has been made.
+              Evidence generated dynamically by investigation engine. Findings support further formal investigation. No legal determination has been made.
             </div>
 
           </div>
@@ -475,29 +437,48 @@ export const Investigations: React.FC = () => {
 
   const mapAreaRef = useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
+  const [spillInfo, setSpillInfo] = useState<any>(null);
+
+  useEffect(() => {
     fetch('/result.json')
       .then(res => res.json())
       .then(data => {
+        if (data && data.provenance && data.provenance.spill_info) {
+          setSpillInfo(data.provenance.spill_info);
+        }
         if (data && data.candidates) {
-          const mappedVessels: Vessel[] = data.candidates.map((c: any, index: number) => ({
-            id: c.candidate_id,
-            name: c.vessel_identity?.ship_name || `UNKNOWN VESSEL ${index+1}`,
-            mmsi: c.vessel_identity?.mmsi || 'N/A',
-            status: index === 0 ? 'highest-ranked' : 'under-review',
-            type: c.vessel_identity?.ship_type || 'Unknown Type',
-            flag: 'N/A', flagName: 'N/A', dwt: 'N/A',
-            lat: 28.85, lon: -89.15, // Dummy map placement, ideally from track
-            heading: 0, speed: 0,
-            lastAis: 'N/A',
-            invScore: Math.round(c.investigation_priority_score * 100),
-            spatialScore: Math.round((c.all_evidence.find((e:any)=>e.evidence_type==='SPATIAL')?.score || 0) * 100),
-            temporalScore: Math.round((c.all_evidence.find((e:any)=>e.evidence_type==='TEMPORAL')?.score || 0) * 100),
-            driftScore: Math.round((c.all_evidence.find((e:any)=>e.evidence_type==='DRIFT')?.score || 0) * 100),
-            aisContinuity: 'moderate',
-            aisGap: false,
-            trackPath: ''
-          }));
+          const mappedVessels: Vessel[] = data.candidates.map((c: any, index: number) => {
+            const track = c.track?.records;
+            const lastRecord = track && track.length > 0 ? track[track.length - 1] : null;
+            
+            const evidence = c.all_evidence?.map((e: any) => ({
+              text: e.description || e.evidence_type,
+              weight: e.direction === 'SUPPORTING' ? 'Supporting' : e.direction === 'CONTRADICTING' ? 'Contradicting' : 'Neutral',
+              level: e.direction === 'SUPPORTING' ? 'strong' : e.direction === 'CONTRADICTING' ? 'circumstantial' : 'moderate',
+            })) || [];
+
+            return {
+              id: c.candidate_id,
+              name: c.vessel_identity?.ship_name || `UNKNOWN VESSEL ${index+1}`,
+              mmsi: c.vessel_identity?.mmsi || 'Not available',
+              status: index === 0 ? 'highest-ranked' : 'under-review',
+              type: c.vessel_identity?.ship_type || 'Not available',
+              flag: 'Not available', flagName: 'Not available', dwt: 'Not available',
+              lat: lastRecord ? lastRecord.latitude : 0, 
+              lon: lastRecord ? lastRecord.longitude : 0,
+              heading: lastRecord ? lastRecord.heading : 0, 
+              speed: lastRecord ? lastRecord.speed : 0,
+              lastAis: lastRecord ? lastRecord.timestamp : 'Not available',
+              invScore: Math.round(c.investigation_priority_score * 100),
+              spatialScore: Math.round((c.all_evidence.find((e:any)=>e.evidence_type==='SPATIAL')?.score || 0) * 100),
+              temporalScore: Math.round((c.all_evidence.find((e:any)=>e.evidence_type==='TEMPORAL')?.score || 0) * 100),
+              driftScore: Math.round((c.all_evidence.find((e:any)=>e.evidence_type==='DRIFT')?.score || 0) * 100),
+              aisContinuity: 'moderate',
+              aisGap: false,
+              trackPath: '',
+              evidenceItems: evidence
+            };
+          });
           setVessels(mappedVessels);
           if (mappedVessels.length > 0) {
             setSelectedVesselId(mappedVessels[0].id);
@@ -603,7 +584,7 @@ export const Investigations: React.FC = () => {
         </div>
 
         {/* ----- RIGHT INTELLIGENCE PANEL ----- */}
-        <RightPanel vessel={selectedVessel}/>
+        <RightPanel vessel={selectedVessel} spillInfo={spillInfo}/>
 
       </div>{/* end .inv-workspace */}
 

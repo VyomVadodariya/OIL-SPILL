@@ -134,3 +134,64 @@ def test_ranking_sensitivity():
         shutil.move(backup_path, fixture_path)
         # Rerun to restore golden state
         subprocess.run(["venv/Scripts/python.exe", "scripts/run_golden_investigation.py"], check=True, capture_output=True)
+
+def test_deterministic_ranking():
+    """
+    Proves that running the investigation twice from a clean state produces identical deterministic outputs.
+    """
+    import subprocess
+    import shutil
+    
+    result_path = "data/demo_case/investigation/result.json"
+    
+    # Run 1
+    subprocess.run(["venv/Scripts/python.exe", "scripts/run_golden_investigation.py"], check=True, capture_output=True)
+    with open(result_path) as f:
+        res1 = json.load(f)
+        
+    # Run 2
+    subprocess.run(["venv/Scripts/python.exe", "scripts/run_golden_investigation.py"], check=True, capture_output=True)
+    with open(result_path) as f:
+        res2 = json.load(f)
+        
+    # Check deterministic outputs
+    assert len(res1["candidates"]) == len(res2["candidates"]), "Candidate count is non-deterministic"
+    for i in range(len(res1["candidates"])):
+        c1 = res1["candidates"][i]
+        c2 = res2["candidates"][i]
+        # Ignore runtime UUIDs, compare ship names, scores
+        assert c1["vessel_identity"]["ship_name"] == c2["vessel_identity"]["ship_name"], "Candidate ranking order is non-deterministic"
+        assert c1["investigation_priority_score"] == c2["investigation_priority_score"], "Candidate score is non-deterministic"
+        
+        # Compare all component scores
+        scores1 = {e["evidence_type"]: e["score"] for e in c1["all_evidence"]}
+        scores2 = {e["evidence_type"]: e["score"] for e in c2["all_evidence"]}
+        assert scores1 == scores2, "Evidence component scores are non-deterministic"
+
+def test_frontend_data_lineage():
+    """
+    Statically inspect Investigations.tsx to ensure no legacy mock data is present.
+    """
+    frontend_path = "src/pages/Investigations/Investigations.tsx"
+    assert os.path.exists(frontend_path), "Frontend file does not exist"
+    
+    with open(frontend_path, "r", encoding="utf-8") as f:
+        content = f.read()
+        
+    forbidden_strings = [
+        "HARBOR PIONEER",
+        "INC-2026-047",
+        "87/100",
+        "42.7 km²",
+        "26°09′N",
+        "051°48′E",
+        "DEMO_CANDIDATES",
+        "Persian Gulf"
+    ]
+    
+    # Let's clean the content of legitimate comments if needed, but it should be absent in code.
+    for string in forbidden_strings:
+        assert string not in content, f"Frontend Data Lineage FAILED: Found forbidden mock string '{string}' in Investigations.tsx"
+    
+    print("Frontend Data Lineage Test PASSED. No mock strings found.")
+
