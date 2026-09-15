@@ -94,11 +94,11 @@ class GulfOfMexicoPatchDataset(Dataset):
         
         # Read image
         with rasterio.open(img_path) as src:
-            image = src.read(1, window=window, boundless=True, fill_value=self.db_min)
+            image = src.read(1, window=window, boundless=False)
             
         # Read mask
         with rasterio.open(mask_path) as src:
-            mask = src.read(1, window=window, boundless=True, fill_value=0)
+            mask = src.read(1, window=window, boundless=False)
             
         # Validate dimensions
         if image.shape != (self.patch_size, self.patch_size) or mask.shape != (self.patch_size, self.patch_size):

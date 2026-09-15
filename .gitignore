@@ -33,3 +33,6 @@ __pycache__/
 model_repo/models/*.pth
 model_repo/data/processed/
 model_repo/.env
+venv/
+data/
+models/
