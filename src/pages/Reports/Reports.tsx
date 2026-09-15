@@ -73,7 +73,7 @@ const DEMO_LEDGER_ITEMS: DemoLedgerItem[] = [
     sourceSystem: 'Multi-Factor Correlation Engine',
     localHash: '4a7d1ed414474e4033ac29ccb8653d9b891e8432b112948cfba488210332810a',
     timestamp: '2026-09-07 09:00:00 UTC',
-    dataQuality: 'Rank #1: HARBOR PIONEER (Score 87)',
+    dataQuality: 'Rank #1: Not available (Score 87)',
   },
 ];
 
@@ -94,7 +94,7 @@ export const Reports: React.FC = () => {
       responsePriorityAnalysis: {
         priority: 'HIGH',
         evaluatedFactors: {
-          spillSize: '42.7 km² (High Severity)',
+          spillSize: 'Not available (High Severity)',
           transportSpeed: '1.6 knots (Moderate Dispersal Rate)',
           environmentalSensitivity: 'Ras Laffan Marine Reserve & Mangrove Inlets (High Exposure)',
           coastalExposureProximity: '22.4 km / 12.1 NM offshore (Imminent)',
@@ -110,20 +110,20 @@ export const Reports: React.FC = () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `OceanIntel_INC-2026-047_Investigation_Dossier.json`;
+    link.download = `OceanIntel_Not available_Investigation_Dossier.json`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 
-    setDownloadNotification(`Exported OceanIntel_INC-2026-047_Investigation_Dossier.json (${(blob.size / 1024).toFixed(1)} KB)`);
+    setDownloadNotification(`Exported OceanIntel_Not available_Investigation_Dossier.json (${(blob.size / 1024).toFixed(1)} KB)`);
     setTimeout(() => setDownloadNotification(null), 5000);
   };
 
   const handleExportGeoJson = () => {
     const geoJsonPayload = {
       type: 'FeatureCollection',
-      name: 'OceanIntel_INC-2026-047_SpillGeometry',
+      name: 'OceanIntel_Not available_SpillGeometry',
       crs: {
         type: 'name',
         properties: { name: 'urn:ogc:def:crs:OGC:1.3:CRS84' },
@@ -173,13 +173,13 @@ export const Reports: React.FC = () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `OceanIntel_INC-2026-047_Geometry.geojson`;
+    link.download = `OceanIntel_Not available_Geometry.geojson`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 
-    setDownloadNotification(`Exported OceanIntel_INC-2026-047_Geometry.geojson (${(blob.size / 1024).toFixed(1)} KB)`);
+    setDownloadNotification(`Exported OceanIntel_Not available_Geometry.geojson (${(blob.size / 1024).toFixed(1)} KB)`);
     setTimeout(() => setDownloadNotification(null), 5000);
   };
 
@@ -344,7 +344,7 @@ export const Reports: React.FC = () => {
                 <section className="rep-section">
                   <h3 className="rep-heading">2. Satellite SAR Detection &amp; Sensor Observation</h3>
                   <p>
-                    On 2026-09-07 at 06:12:04 UTC, a Sentinel-1A C-band Synthetic Aperture Radar (SAR) acquisition in Interferometric Wide (IW) swath mode captured a pronounced surface backscatter depression in the central Persian Gulf. The slick signature was segmented using the U-Net + ResNet34 pipeline architecture.
+                    On 2026-09-07 at 06:12:04 UTC, a Sentinel-1A C-band Synthetic Aperture Radar (SAR) acquisition in Interferometric Wide (IW) swath mode captured a pronounced surface backscatter depression in the central Not available. The slick signature was segmented using the U-Net + ResNet34 pipeline architecture.
                   </p>
                   <div className="rep-grid-3col">
                     <div className="rep-stat-box">
@@ -400,7 +400,7 @@ export const Reports: React.FC = () => {
                     <Info size={14} style={{ color: 'var(--accent-cyan)', flexShrink: 0, marginTop: 2 }} />
                     <div>
                       <strong>AIS Observation Gap Detected: </strong>
-                      Candidate vessel <strong>HARBOR PIONEER (MMSI 538009842)</strong> experienced an AIS observation gap of <strong>4 hours 08 minutes</strong> (between 10:14 UTC and 14:22 UTC on 2026-09-07).
+                      Candidate vessel <strong>Not available (MMSI 538009842)</strong> experienced an AIS observation gap of <strong>4 hours 08 minutes</strong> (between 10:14 UTC and 14:22 UTC on 2026-09-07).
                       An AIS observation gap detected does not imply deliberate transmitter shutdown; signal loss may be caused by satellite reception masking, high antenna traffic, or propagation attenuation.
                     </div>
                   </div>
@@ -539,7 +539,7 @@ export const Reports: React.FC = () => {
                     <div className="rep-grid-2col">
                       <div className="rep-factor-row">
                         <strong>1. Spill Size:</strong>
-                        <span>42.7 km² area &gt; 30 km² threshold (High Volume / Heavy Slick)</span>
+                        <span>Not available area &gt; 30 km² threshold (High Volume / Heavy Slick)</span>
                       </div>
                       <div className="rep-factor-row">
                         <strong>2. Transport Speed:</strong>
@@ -564,7 +564,7 @@ export const Reports: React.FC = () => {
                     </div>
 
                     <div style={{ marginTop: 10, fontSize: '11px', color: 'var(--text-muted)' }}>
-                      <strong>Why HIGH priority was assigned:</strong> The combination of large detected surface area (42.7 km²), near-shore trajectory (22.4 km), and sensitive coral/mangrove ecosystems in the path of the 72h forecast cone mandates Tier-2/Tier-3 response mobilization.
+                      <strong>Why HIGH priority was assigned:</strong> The combination of large detected surface area (Not available), near-shore trajectory (22.4 km), and sensitive coral/mangrove ecosystems in the path of the 72h forecast cone mandates Tier-2/Tier-3 response mobilization.
                     </div>
                   </div>
                 </section>

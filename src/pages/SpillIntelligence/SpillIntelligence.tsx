@@ -162,7 +162,7 @@ export const SpillIntelligence: React.FC = () => {
                 <div className="spill-kv">
                   <span className="spill-kv-label">Surface Area</span>
                   <span className="spill-kv-val spill-kv-val--primary">
-                    {inferenceData ? `${(inferenceData.detection.object_count * 1.4).toFixed(1)} km² (Live)` : '42.7 km² (4,270 ha)'}
+                    {inferenceData ? `${(inferenceData.detection.object_count * 1.4).toFixed(1)} km² (Live)` : 'Not available (4,270 ha)'}
                   </span>
                 </div>
 
@@ -288,7 +288,7 @@ export const SpillIntelligence: React.FC = () => {
           <div className="spill-kpi-item" title="Calculated Surface Footprint">
             <span className="spill-kpi-label">Surface Area</span>
             <span className="spill-kpi-value" style={{ color: 'var(--status-critical)' }}>
-              {inferenceData ? `${(inferenceData.detection.object_count * 1.4).toFixed(1)} km²` : '42.7 km²'}
+              {inferenceData ? `${(inferenceData.detection.object_count * 1.4).toFixed(1)} km²` : 'Not available'}
             </span>
           </div>
 

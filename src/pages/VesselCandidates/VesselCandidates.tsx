@@ -20,7 +20,7 @@ import {
   ShieldAlert,
   ArrowUpDown,
 } from 'lucide-react';
-import { DEMO_CANDIDATES, type IncidentCandidate } from '../../data/demo/incident';
+import { , type IncidentCandidate } from '../../data/demo/incident';
 import { DataStatusBadge } from '../../components/common/DataStatusBadge';
 import './VesselCandidates.css';
 
@@ -29,7 +29,7 @@ import './VesselCandidates.css';
    ============================================================ */
 
 export type Candidate = IncidentCandidate;
-const CANDIDATES: Candidate[] = DEMO_CANDIDATES;
+const CANDIDATES: Candidate[] = [];
 
 /* ============================================================
    SUB-COMPONENTS

@@ -170,7 +170,7 @@ export const AisMap: React.FC<AisMapProps> = ({
               <circle cx="470" cy="340" r="5" fill="#f97316" />
               <circle cx="470" cy="340" r="14" fill="none" stroke="#f97316" strokeWidth="1" strokeDasharray="3 3" />
               <text x="490" y="344" fill="#f97316" fontSize="10" fontFamily="JetBrains Mono" fontWeight="700">
-                SPILL-2026-047 (42.7 km²)
+                SPILL-2026-047 (Not available)
               </text>
             </g>
           )}

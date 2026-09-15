@@ -74,7 +74,7 @@ export const SpillMap: React.FC<SpillMapProps> = ({
       setHoverTarget({
         x, y,
         title: 'Spill Centroid (Center of Mass)',
-        value: '26°09′00″N · 051°48′00″E',
+        value: 'Not available · Not available',
         sub: 'Radiometric NRCS Weighted Center',
       });
     }
@@ -410,7 +410,7 @@ export const SpillMap: React.FC<SpillMapProps> = ({
               <g transform="translate(32, 22)">
                 <rect x="0" y="-14" width="165" height="26" fill="#060f1c" stroke="#ffaa00" strokeWidth="1" rx="3" />
                 <text x="8" y="3" fill="#ffffff" fontSize="10" fontFamily="JetBrains Mono" fontWeight="700">
-                  CENTROID: 26°09′N 051°48′E
+                  CENTROID: Not available Not available
                 </text>
               </g>
             </g>

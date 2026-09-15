@@ -405,11 +405,11 @@ export const TopBar: React.FC<TopBarProps> = ({ activeId, currentTime, utcTime }
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 <div style={{ background: 'var(--surface-base)', padding: '6px 8px', borderRadius: 'var(--radius-xs)' }}>
                   <div style={{ color: 'var(--accent-cyan)', fontWeight: 600 }}>Sentinel-1A SAR Pass Ingested</div>
-                  <div style={{ color: 'var(--text-muted)' }}>42.7 km² surface backscatter anomaly detected at 06:12:04 UTC.</div>
+                  <div style={{ color: 'var(--text-muted)' }}>Not available surface backscatter anomaly detected at 06:12:04 UTC.</div>
                 </div>
                 <div style={{ background: 'var(--surface-base)', padding: '6px 8px', borderRadius: 'var(--radius-xs)' }}>
                   <div style={{ color: '#e8423a', fontWeight: 600 }}>AIS Observation Gap Flagged</div>
-                  <div style={{ color: 'var(--text-muted)' }}>HARBOR PIONEER transmission gap (4h 08m) coincides with release window.</div>
+                  <div style={{ color: 'var(--text-muted)' }}>Not available transmission gap (4h 08m) coincides with release window.</div>
                 </div>
               </div>
             </div>

@@ -103,7 +103,7 @@ def run_investigation():
     params = DriftModelParameters(timestep_seconds=3600, integration_method="EULER", windage_range=(0.02, 0.04), diffusion_coef_m2_s=10.0)
     drift_sim = DriftSimulation(env, params, random_seed=42)
     
-    particles = drift_sim.initialize_particles(100, geometry=geom_wgs84)
+    particles = drift_sim.initialize_particles(500, geometry=geom_wgs84)
     drift_sim.run_simulation(particles, start_time=detection.acquisition_timestamp, duration_hours=24, is_backward=True)
     
     corridor = generate_corridor_geometry(particles)
@@ -131,7 +131,9 @@ def run_investigation():
     
     # Simulate API orchestration
     min_lon, min_lat, max_lon, max_lat = -180, -90, 180, 90
-    raw_positions = ais_provider.get_historical_positions(min_lon, min_lat, max_lon, max_lat, drift_result.temporal_window.simulation_start, drift_result.temporal_window.simulation_end)
+    search_start = drift_result.temporal_window.simulation_start - datetime.timedelta(days=7)
+    search_end = drift_result.temporal_window.simulation_end + datetime.timedelta(days=7)
+    raw_positions = ais_provider.get_historical_positions(min_lon, min_lat, max_lon, max_lat, search_start, search_end)
     positions = normalize_ais_positions(raw_positions, ais_provider.provider_name)
     from src.ais.schema import VesselIdentity
     vessel_identities = {}
@@ -202,6 +204,17 @@ def run_investigation():
         "centroid_lon": detection.geo_centroid.longitude,
         "geometry_wkt": detection.geometry.wkt if hasattr(detection.geometry, 'wkt') else str(detection.geometry)
     }
+    
+    final_result.provenance["drift_info"] = {
+        "particle_count": len(particles)
+    }
+    
+    manifest_path = "data/demo_case/inference/inference_manifest.json"
+    if os.path.exists(manifest_path):
+        with open(manifest_path, "r") as mf:
+            final_result.provenance["inference_manifest"] = json.load(mf)
+    else:
+        final_result.provenance["inference_manifest"] = None
     
     # Save output for frontend
     out_dir = Path("data/demo_case/investigation")

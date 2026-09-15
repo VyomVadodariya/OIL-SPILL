@@ -10,7 +10,7 @@
  *   x = (lon - 50.8) / 3.0 * 1600
  *   y = (29.8 - lat) / 2.6 * 800
  *
- * Region: Central Persian Gulf — Iranian coast (N) / Arabian Peninsula (S)
+ * Region: Central Not available — Iranian coast (N) / Arabian Peninsula (S)
  * All data is simulated for UI demonstration purposes.
  */
 
@@ -78,7 +78,7 @@ export const MaritimeMap: React.FC<MaritimeMapProps> = ({
         viewBox={`0 0 ${VW} ${VH}`}
         preserveAspectRatio="xMidYMid slice"
         style={{ display: 'block', width: '100%', height: '100%' }}
-        aria-label="Maritime intelligence map — Persian Gulf, simulated operational data"
+        aria-label="Maritime intelligence map — Not available, simulated operational data"
         role="img"
       >
         <defs>
@@ -209,7 +209,7 @@ export const MaritimeMap: React.FC<MaritimeMapProps> = ({
 
       {/* ================================================================
           6. ISLANDS
-          Small ellipses at approximate positions of Persian Gulf islands.
+          Small ellipses at approximate positions of Not available islands.
           ================================================================ */}
       {/* Island 1 — Farsi-like, NW */}
       <ellipse cx={295} cy={370} rx={19} ry={11}
@@ -231,7 +231,7 @@ export const MaritimeMap: React.FC<MaritimeMapProps> = ({
             letterSpacing="2" fontWeight="600">ARABIAN PENINSULA</text>
       <text x={730} y={450} textAnchor="middle" fontSize="13"
             fill="#0369a1" fontFamily="Inter,sans-serif"
-            letterSpacing="8" fontStyle="italic" fontWeight="600" opacity="0.4">PERSIAN GULF</text>
+            letterSpacing="8" fontStyle="italic" fontWeight="600" opacity="0.4">Not available</text>
 
       {/* ================================================================
           8. GRATICULE LABELS
@@ -359,7 +359,7 @@ export const MaritimeMap: React.FC<MaritimeMapProps> = ({
           13. OIL SPILL POLYGON — SPILL-2026-047
           Irregular organic blob representing SAR-detected hydrocarbon signature.
           Center: 28.45°N, 52.18°E → SVG (736, 415)
-          Extent: ~6–8km in each direction, area ≈ 42.7 km²
+          Extent: ~6–8km in each direction, area ≈ Not available
           ================================================================ */}
       {activeLayers.has('spill') && (
         <g>

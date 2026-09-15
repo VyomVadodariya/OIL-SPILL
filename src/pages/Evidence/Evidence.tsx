@@ -145,11 +145,11 @@ export const Evidence: React.FC = () => {
               <div className="ev-kv-grid">
                 <div className="ev-kv">
                   <span className="ev-kv-label">Spill Footprint Area</span>
-                  <span className="ev-kv-val ev-kv-val--cyan">42.7 km² (4,270 ha)</span>
+                  <span className="ev-kv-val ev-kv-val--cyan">Not available (4,270 ha)</span>
                 </div>
                 <div className="ev-kv">
                   <span className="ev-kv-label">Centroid Coordinates</span>
-                  <span className="ev-kv-val ev-kv-val--mono">26°09′N · 051°48′E</span>
+                  <span className="ev-kv-val ev-kv-val--mono">Not available · Not available</span>
                 </div>
                 <div className="ev-kv">
                   <span className="ev-kv-label">Centroid Proximity to Track</span>

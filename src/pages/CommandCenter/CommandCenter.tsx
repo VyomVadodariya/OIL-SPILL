@@ -25,7 +25,7 @@ import {
 import type { MapVessel } from '../../components/map/MapLibreMap';
 import {
   DEMO_INCIDENT,
-  DEMO_CANDIDATES,
+  ,
   DEMO_TIMELINE,
   type IncidentCandidate,
   type TimelineStep,
@@ -441,9 +441,9 @@ export const CommandCenter: React.FC<CommandCenterProps> = ({ onStartGuidedMode 
   const mapAreaRef = useRef<HTMLDivElement>(null);
 
   const selectedVessel =
-    DEMO_CANDIDATES.find((v) => v.id === selectedVesselId) ?? DEMO_CANDIDATES[0];
+    [].find((v) => v.id === selectedVesselId) ?? [][0];
   const hoveredVessel =
-    DEMO_CANDIDATES.find((v) => v.id === hoveredVesselId) ?? null;
+    [].find((v) => v.id === hoveredVesselId) ?? null;
 
   const toggleLayer = useCallback((id: string) => {
     setActiveLayers((prev) => {
@@ -487,7 +487,7 @@ export const CommandCenter: React.FC<CommandCenterProps> = ({ onStartGuidedMode 
             }
           >
             <MapLibreMap
-              vessels={DEMO_CANDIDATES as unknown as MapVessel[]}
+              vessels={[] as unknown as MapVessel[]}
               selectedId={selectedVesselId}
               activeLayers={activeLayers}
               onVesselClick={setSelectedVesselId}

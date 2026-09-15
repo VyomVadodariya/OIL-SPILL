@@ -91,7 +91,7 @@ const STAGES: Stage[] = [
     name: 'SPILL CHARACTERIZATION',
     shortName: '6. SPILL CHARACTERIZATION',
     defaultViewMode: 'segmentation',
-    detail: 'Morphological boundary closing extracts polygon metrics: 42.7 km² surface area, 2.8:1 elongation, N 18° W orientation.',
+    detail: 'Morphological boundary closing extracts polygon metrics: Not available surface area, 2.8:1 elongation, N 18° W orientation.',
     subText: 'Vector Polygon & Metrics',
   },
 ];
@@ -107,7 +107,7 @@ interface CatStat {
 
 const CATEGORY_STATS: CatStat[] = [
   { id: 'sea',       area: '39,438 km²', pct: '98.6%', nrcs: '-12.4 dB', qualityScore: '99/100' },
-  { id: 'oil',       area: '42.7 km²',   pct: '0.11%', nrcs: '-24.6 dB', qualityScore: '92/100' },
+  { id: 'oil',       area: 'Not available',   pct: '0.11%', nrcs: '-24.6 dB', qualityScore: '92/100' },
   { id: 'lookalike', area: '18.4 km²',   pct: '0.05%', nrcs: '-18.2 dB', qualityScore: '78/100' },
   { id: 'ship',      area: '2 targets',  pct: '<0.01%', nrcs: '+7.5 dB',  qualityScore: '96/100' },
   { id: 'land',      area: '500.9 km²',  pct: '1.25%', nrcs: '+2.1 dB',  qualityScore: '99/100' },
@@ -312,7 +312,7 @@ export const SarDetection: React.FC = () => {
               <div className="sar-section-body">
                 <div className="sar-kv">
                   <span className="sar-kv-label">Candidate Surface Area</span>
-                  <span className="sar-kv-val sar-kv-val--cyan" style={{ fontSize: '13px' }}>42.7 km²</span>
+                  <span className="sar-kv-val sar-kv-val--cyan" style={{ fontSize: '13px' }}>Not available</span>
                 </div>
 
                 <div className="sar-kv">

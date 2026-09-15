@@ -10,7 +10,7 @@ from src.ais import (
 )
 
 def _load_config():
-    with open("configs/stage5_config.yaml", "r") as f:
+    with open("model_repo/configs/stage5_config.yaml", "r") as f:
         return yaml.safe_load(f)["stage5"]
 
 def test_stage4_to_stage5_pipeline():

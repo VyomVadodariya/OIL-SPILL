@@ -22,7 +22,7 @@ import {
 } from 'lucide-react';
 
 import { AisMap, type AisVessel } from './AisMap';
-import { DEMO_CANDIDATES } from '../../data/demo/incident';
+import {  } from '../../data/demo/incident';
 import { DataStatusBadge } from '../../components/common/DataStatusBadge';
 import './AisIntelligence.css';
 
@@ -30,7 +30,7 @@ import './AisIntelligence.css';
    CANONICAL AIS CANDIDATES (Imported from DEMO_INCIDENT)
    ============================================================ */
 
-const SIMULATED_VESSELS: AisVessel[] = DEMO_CANDIDATES as unknown as AisVessel[];
+const SIMULATED_VESSELS: AisVessel[] = [] as unknown as AisVessel[];
 
 export const AisIntelligence: React.FC = () => {
   const [selectedVesselId, setSelectedVesselId] = useState<string>('harbor-pioneer');

@@ -97,7 +97,7 @@ export const SarViewer: React.FC<SarViewerProps> = ({
     else if (Math.abs(rx - 0.58) < 0.03 && Math.abs(ry - 0.42) < 0.03) {
       classCat = 'ship';
       nrcs = '+8.7 dB';
-      label = 'Vessel HARBOR PIONEER (Metallic Target)';
+      label = 'Vessel Not available (Metallic Target)';
     }
     // Check ship target 2
     else if (Math.abs(rx - 0.40) < 0.03 && Math.abs(ry - 0.30) < 0.03) {
@@ -355,7 +355,7 @@ export const SarViewer: React.FC<SarViewerProps> = ({
             )}
 
             {/* Vessel Targets (Metallic Point Backscatter) */}
-            {/* Target 1: HARBOR PIONEER */}
+            {/* Target 1: Not available */}
             <g
               transform="translate(580, 270)"
               opacity={highlightCategory && highlightCategory !== 'ship' ? 0.25 : 1}
@@ -392,7 +392,7 @@ export const SarViewer: React.FC<SarViewerProps> = ({
                 <line x1="0" y1="-16" x2="0" y2="16" stroke="#f97316" strokeWidth="1.5" />
                 <circle r="22" fill="none" stroke="#f97316" strokeWidth="1" strokeDasharray="3 3" />
                 <text x="26" y="4" fill="#f97316" fontSize="11" fontFamily="JetBrains Mono" fontWeight="700">
-                  CENTROID: 26°09′N 051°48′E
+                  CENTROID: Not available Not available
                 </text>
               </g>
 

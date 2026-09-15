@@ -54,7 +54,7 @@ export const HISTORICAL_DEMO_DATA: HistoricalDemoData = {
   isSimulated: true,
   disclaimer: 'Incidents, vessel references and statistics shown in this view are simulated demonstration records used to illustrate the historical-risk workflow.',
   incidents: [
-    { id: 'h-01', name: 'SPILL-2026-047 (Current)', year: '2026', area: '42.7 km²', volume: '4,820 bbl', severity: 'critical', attributed: 'Under Review', x: 470, y: 340 },
+    { id: 'h-01', name: 'SPILL-2026-047 (Current)', year: '2026', area: 'Not available', volume: '4,820 bbl', severity: 'critical', attributed: 'Under Review', x: 470, y: 340 },
     { id: 'h-02', name: 'SPILL-2025-112 (Jubail Outer)', year: '2025', area: '28.1 km²', volume: '2,900 bbl', severity: 'critical', attributed: 'Candidate Linked (MMSI 538002910)', x: 740, y: 280 },
     { id: 'h-03', name: 'SPILL-2025-084 (Hormuz Transit)', year: '2025', area: '14.5 km²', volume: '1,200 bbl', severity: 'warning',  attributed: 'Unlinked (AIS Gap)', x: 280, y: 190 },
     { id: 'h-04', name: 'SPILL-2024-041 (South Pars Zone)', year: '2024', area: '31.0 km²', volume: '3,400 bbl', severity: 'critical', attributed: 'Platform Discharge (SP-04)', x: 580, y: 220 },

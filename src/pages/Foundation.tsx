@@ -36,7 +36,7 @@ interface Vessel {
 }
 
 const VESSELS: Vessel[] = [
-  { id: 'v1', mmsi: '538009842', name: 'HARBOR PIONEER', type: 'Oil Tanker', flag: 'MH', status: 'under-review', lat: '26.1520°N', lon: '51.8150°E', speed: 0.2, risk: 'High' },
+  { id: 'v1', mmsi: '538009842', name: 'Not available', type: 'Oil Tanker', flag: 'MH', status: 'under-review', lat: '26.1520°N', lon: '51.8150°E', speed: 0.2, risk: 'High' },
   { id: 'v2', mmsi: '477213650', name: 'PACIFIC ENDEAVOR', type: 'Chemical Tanker', flag: 'HK', status: 'monitored', lat: '26.0950°N', lon: '51.7200°E', speed: 4.1, risk: 'Medium' },
   { id: 'v3', mmsi: '229109000', name: 'OCEAN SCOUT', type: 'Patrol Vessel', flag: 'MT', status: 'cleared', lat: '26.2200°N', lon: '51.8600°E', speed: 8.7, risk: 'None' },
   { id: 'v4', mmsi: '636019241', name: 'DELTA STAR', type: 'Oil Tanker', flag: 'LR', status: 'under-review', lat: '26.1850°N', lon: '51.7650°E', speed: 0.0, risk: 'Critical' },
@@ -280,7 +280,7 @@ export const FoundationShowcase: React.FC = () => {
                       { label: '13px / base',size: '13px', sample: 'Default interface text' },
                       { label: '14px / md',  size: '14px', sample: 'Panel titles, section headers' },
                       { label: '16px / lg',  size: '16px', sample: 'Modal headings, prominent labels' },
-                      { label: '22px / 2xl', size: '22px', sample: 'Metric values: 42.7 km²' },
+                      { label: '22px / 2xl', size: '22px', sample: 'Metric values: Not available' },
                       { label: '28px / 3xl', size: '28px', sample: 'Dashboard KPI' },
                     ].map(t => (
                       <div key={t.label} style={{ display: 'flex', alignItems: 'baseline', gap: 'var(--space-4)', borderBottom: '1px solid var(--border-faint)', paddingBottom: 'var(--space-2)' }}>
@@ -487,7 +487,7 @@ export const FoundationShowcase: React.FC = () => {
                     />
                     <DataCard
                       label="Spill Surface Area"
-                      value="42.7"
+                      value="Not available"
                       unit="km²"
                       delta="+2.1 km²"
                       deltaDir="up"
@@ -548,7 +548,7 @@ export const FoundationShowcase: React.FC = () => {
                   <div className="showcase-grid-2">
                     <Panel>
                       <PanelHeader
-                        title="HARBOR PIONEER"
+                        title="Not available"
                         subtitle="MMSI 538009842 · Flag MH"
                         icon={<Ship size={14} />}
                         actions={
@@ -579,7 +579,7 @@ export const FoundationShowcase: React.FC = () => {
                         </PanelSection>
                         <PanelSection label="Risk Assessment">
                           <KVRow label="Risk Level" value={<Badge variant="critical">HIGH</Badge>} />
-                          <KVRow label="Investigation Score" value="87/100" mono />
+                          <KVRow label="Investigation Score" value="Not available" mono />
                           <KVRow label="Analyst" value="J. Reeves" />
                         </PanelSection>
                       </PanelBody>
@@ -595,7 +595,7 @@ export const FoundationShowcase: React.FC = () => {
                           <KVRow label="Detection Count" value="4 passes" />
                         </PanelSection>
                         <PanelSection label="Physical Parameters" collapsible>
-                          <KVRow label="Surface Area" value="42.7 km²" mono />
+                          <KVRow label="Surface Area" value="Not available" mono />
                           <KVRow label="Est. Volume" value="4,820 bbl" mono />
                           <KVRow label="Est. Thickness" value="0.08–0.14 mm" mono />
                           <KVRow label="Weathering" value="35% (emulsified)" />
@@ -687,7 +687,7 @@ export const FoundationShowcase: React.FC = () => {
       <Modal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        title="Vessel Detail — HARBOR PIONEER"
+        title="Vessel Detail — Not available"
         size="lg"
         footer={
           <>
@@ -714,7 +714,7 @@ export const FoundationShowcase: React.FC = () => {
               <div className="panel-section-label" style={{ marginBottom: 'var(--space-2)' }}>Vessel Identity</div>
               <KVRow label="MMSI" value="538009842" mono />
               <KVRow label="IMO" value="9735982" mono />
-              <KVRow label="Name" value="HARBOR PIONEER" />
+              <KVRow label="Name" value="Not available" />
               <KVRow label="Type" value="Oil Tanker" />
               <KVRow label="Flag" value="Marshall Islands" />
             </div>
@@ -742,7 +742,7 @@ export const FoundationShowcase: React.FC = () => {
       <Drawer
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
-        title="Evidence Log — INC-2026-047"
+        title="Evidence Log — Not available"
         size="md"
         side="right"
         footer={
@@ -754,8 +754,8 @@ export const FoundationShowcase: React.FC = () => {
       >
         <div style={{ padding: 'var(--space-4)', display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
           {[
-            { id: 'E-001', type: 'SAR Image', source: 'Sentinel-1A', ts: '2026-09-07 06:12Z', status: 'ingested', note: 'Primary spill detection. Dark patch 42.7 km².' },
-            { id: 'E-002', type: 'AIS Record', source: 'MarineTraffic', ts: '2026-09-07 05:50Z', status: 'ingested', note: 'HARBOR PIONEER last transmitted position 0.8 nm from spill centroid.' },
+            { id: 'E-001', type: 'SAR Image', source: 'Sentinel-1A', ts: '2026-09-07 06:12Z', status: 'ingested', note: 'Primary spill detection. Dark patch Not available.' },
+            { id: 'E-002', type: 'AIS Record', source: 'MarineTraffic', ts: '2026-09-07 05:50Z', status: 'ingested', note: 'Not available last transmitted position 0.8 nm from spill centroid.' },
             { id: 'E-003', type: 'Optical Image', source: 'Planet Labs', ts: '2026-09-07 08:34Z', status: 'pending', note: 'Cloud cover 35%. Partial visibility of northern spill edge.' },
             { id: 'E-004', type: 'AIS Gap Log', source: 'System', ts: '2026-09-07 10:00Z', status: 'ingested', note: 'MMSI 538009842 — 4h 08m signal gap coinciding with spill window.' },
             { id: 'E-005', type: 'Weather Report', source: 'ECMWF', ts: '2026-09-07 00:00Z', status: 'ingested', note: 'Wind NNW 14 kts, current 1.4 kts — consistent with drift direction.' },

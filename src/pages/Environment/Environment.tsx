@@ -121,7 +121,7 @@ export const Environment: React.FC = () => {
                   </div>
                   <div className="env-kv">
                     <span className="env-kv-label">Surface Water Salinity</span>
-                    <span className="env-kv-val" style={{ fontFamily: 'var(--font-mono)' }}>39.2 PSU (Persian Gulf Basin)</span>
+                    <span className="env-kv-val" style={{ fontFamily: 'var(--font-mono)' }}>39.2 PSU (Not available Basin)</span>
                   </div>
                   <div className="env-kv">
                     <span className="env-kv-label">Observed Sea State</span>

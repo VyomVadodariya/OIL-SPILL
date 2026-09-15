@@ -19,25 +19,42 @@ def run_golden_inference():
     out_dir = Path("data/demo_case")
     out_dir.mkdir(parents=True, exist_ok=True)
     
-    manifest_path = out_dir / "manifest.json"
+    def compute_sha256(filepath):
+        import hashlib
+        sha256_hash = hashlib.sha256()
+        try:
+            with open(filepath, "rb") as f:
+                for byte_block in iter(lambda: f.read(4096), b""):
+                    sha256_hash.update(byte_block)
+            return sha256_hash.hexdigest()
+        except Exception:
+            return None
+
+    manifest_dir = Path("data/demo_case/inference")
+    manifest_dir.mkdir(parents=True, exist_ok=True)
+    manifest_path = manifest_dir / "inference_manifest.json"
+    
+    out_mask_path = result.get('output_mask', 'data/processed/inference_outputs/20191015_mask.tif')
     
     manifest = {
-        "case_id": "GOLDEN_DEMO_20191015",
-        "sar_source": "Sentinel-1 (Presumed from Zenodo)",
-        "sar_acquisition_time": "2019-10-15T00:00:00Z",
-        "sar_location": "EPSG:32616",
-        "sar_format": "GeoTIFF",
-        "sar_provenance": "data/raw/sar/test/images/20191015.tif",
-        "label_provenance": "data/raw/sar/test/masks/20191015.tif",
-        "model_provenance": "models/best_model.pth (Verified Trained Checkpoint)",
-        "environmental_data_provenance": "data/demo_case/environmental/forcing.json (Deterministic Demo Fixture)",
-        "ais_provenance": "data/demo_case/ais/fixture.csv (Deterministic Demo Fixture)",
-        "data_mode": {
-            "sar": "REAL",
-            "model": "TRAINED",
-            "inference": "ACTUAL INFERENCE",
-            "environment": "DEMO ENVIRONMENTAL FORCING",
-            "ais": "SYNTHETIC DEMO"
+        "input_sar": {
+            "filename": golden_scene,
+            "sha256": compute_sha256(golden_scene)
+        },
+        "model": {
+            "checkpoint": "models/best_model.pth",
+            "sha256": compute_sha256("models/best_model.pth"),
+            "architecture": "U-Net + ResNet34"
+        },
+        "output_mask": {
+            "filename": out_mask_path,
+            "sha256": compute_sha256(out_mask_path)
+        },
+        "inference": {
+            "method": "SARInferencePipeline.run_inference",
+            "device": "cpu", # typically cpu or cuda
+            "threshold": 0.5, # standard
+            "stride": "default"
         }
     }
     

@@ -51,7 +51,7 @@ const BASEMAP_STYLES: Record<BasemapTheme, string> = {
   dark: 'https://tiles.openfreemap.org/styles/dark',
 };
 
-const DEFAULT_CENTER: [number, number] = [51.80, 26.15]; // Persian Gulf Offshore [lon, lat]
+const DEFAULT_CENTER: [number, number] = [51.80, 26.15]; // Not available Offshore [lon, lat]
 const DEFAULT_ZOOM = 8.5;
 
 const setupGeoJsonLayers = (map: maplibregl.Map, vesselData: MapVessel[]) => {

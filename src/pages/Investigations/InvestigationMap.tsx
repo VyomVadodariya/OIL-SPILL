@@ -2,7 +2,7 @@
  * OceanIntel — Investigation Map Component
  *
  * Dedicated investigation-mode maritime chart.
- * Region: Central Persian Gulf Offshore (Open Waters: 26.15°N, 51.80°E).
+ * Region: Central Not available Offshore (Open Waters: 26.15°N, 51.80°E).
  *
  * ViewBox: 0 0 1400 800
  * Lon range: 50.55°E – 53.05°E (2.5°)
@@ -72,7 +72,7 @@ export const InvestigationMap: React.FC<InvMapProps> = ({
         viewBox={`0 0 ${VW} ${VH}`}
         preserveAspectRatio="xMidYMid slice"
         style={{ display: 'block', width: '100%', height: '100%' }}
-        aria-label="Investigation chart — Central Persian Gulf Offshore, simulated data"
+        aria-label="Investigation chart — Central Not available Offshore, simulated data"
         role="img"
       >
         <defs>
@@ -227,7 +227,7 @@ export const InvestigationMap: React.FC<InvMapProps> = ({
             fontWeight="700"
             opacity="0.4"
           >
-            PERSIAN GULF (CENTRAL OFFSHORE)
+            Not available (CENTRAL OFFSHORE)
           </text>
 
           {/* 7. GRATICULE LABELS */}
@@ -417,7 +417,7 @@ export const InvestigationMap: React.FC<InvMapProps> = ({
                 fill="#f97316"
                 letterSpacing="0.6"
               >
-                SPILL-2026-047 (42.7 km²)
+                SPILL-2026-047 (Not available)
               </text>
             </g>
           )}

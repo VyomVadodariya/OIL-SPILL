@@ -2,7 +2,7 @@
  * OceanIntel — GeoJSON Adapter Utility
  *
  * Integrates with centralized DEMO_INCIDENT source of truth.
- * Location: Central Persian Gulf Offshore (26.15°N, 51.80°E)
+ * Location: Central Not available Offshore (26.15°N, 51.80°E)
  */
 
 export {
@@ -16,7 +16,7 @@ export {
   buildAisTrackGeoJSON,
   buildVesselsGeoJSON,
   DEMO_INCIDENT,
-  DEMO_CANDIDATES,
+  [],
   DEMO_TIMELINE,
 } from '../data/demo/incident';
 

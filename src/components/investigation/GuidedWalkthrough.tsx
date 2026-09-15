@@ -35,9 +35,9 @@ export const WALKTHROUGH_STEPS: WalkthroughStep[] = [
     navId: 'command-center',
     title: '01 · COMMAND CENTER',
     subtitle: 'Incident Overview & Map Intelligence',
-    badge: 'Active Incident · INC-2026-047',
-    description: 'Active Detection: 42.7 km² surface slick centered at 26°09′N, 051°48′E in the Persian Gulf. Map-first geospatial overview establishes detection parameters.',
-    requiredPhrasing: 'Active Detection · 42.7 km² Oil Slick Signature',
+    badge: 'Active Incident · Not available',
+    description: 'Active Detection: Not available surface slick centered at Not available, Not available in the Not available. Map-first geospatial overview establishes detection parameters.',
+    requiredPhrasing: 'Active Detection · Not available Oil Slick Signature',
   },
   {
     step: 2,
@@ -54,8 +54,8 @@ export const WALKTHROUGH_STEPS: WalkthroughStep[] = [
     title: '03 · SPILL INTELLIGENCE',
     subtitle: 'Spill Geometry & Morphometry',
     badge: 'Geometry Characterization',
-    description: 'Geometric extraction computes morphological parameters: 42.7 km² area, 14.8 km length, 5.3 km width, 2.8:1 elongation ratio, and N 18° W orientation axis.',
-    requiredPhrasing: 'Area: 42.7 km² · Orientation: N 18° W · Aspect: 2.8:1',
+    description: 'Geometric extraction computes morphological parameters: Not available area, 14.8 km length, 5.3 km width, 2.8:1 elongation ratio, and N 18° W orientation axis.',
+    requiredPhrasing: 'Area: Not available · Orientation: N 18° W · Aspect: 2.8:1',
   },
   {
     step: 4,
@@ -72,7 +72,7 @@ export const WALKTHROUGH_STEPS: WalkthroughStep[] = [
     title: '05 · AIS INTELLIGENCE',
     subtitle: 'Telemetry Tracking & Observation Gaps',
     badge: 'AIS Observation Gap Detected',
-    description: 'Reconstructed AIS tracks for transiting commercial vessels. AIS observation gap detected on HARBOR PIONEER (4h 08m duration) coinciding with backward drift release window.',
+    description: 'Reconstructed AIS tracks for transiting commercial vessels. AIS observation gap detected on Not available (4h 08m duration) coinciding with backward drift release window.',
     requiredPhrasing: 'AIS observation gap detected · 4h 08m Duration',
   },
   {
@@ -81,8 +81,8 @@ export const WALKTHROUGH_STEPS: WalkthroughStep[] = [
     title: '06 · VESSEL CANDIDATES',
     subtitle: 'Explainable Multi-Factor Ranking',
     badge: 'Highest-Ranked Candidate',
-    description: 'Highest-Ranked Investigation Candidate: HARBOR PIONEER with an Investigation Score of 87/100 across spatial, temporal, drift, heading, and speed compatibility criteria.',
-    requiredPhrasing: 'Highest-Ranked Investigation Candidate · Investigation Score 87/100',
+    description: 'Highest-Ranked Investigation Candidate: Not available with an Investigation Score of Not available across spatial, temporal, drift, heading, and speed compatibility criteria.',
+    requiredPhrasing: 'Highest-Ranked Investigation Candidate · Investigation Score Not available',
   },
   {
     step: 7,

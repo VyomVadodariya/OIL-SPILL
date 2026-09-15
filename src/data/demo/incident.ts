@@ -6,7 +6,7 @@
  * All coordinates, geometry, candidates, drift envelopes, timeline events,
  * and environmental parameters MUST reference this module.
  *
- * Geographic Location: Central Persian Gulf Offshore (Open Water)
+ * Geographic Location: Central Not available Offshore (Open Water)
  * Approximate Centroid: Latitude 26.15°N, Longitude 51.80°E
  * (DMS: 26° 09′ 00″ N, 051° 48′ 00″ E)
  *
@@ -140,7 +140,7 @@ export interface DemoIncidentData {
 }
 
 /* ============================================================
-   DEMO GEOMETRIES (Offshore Persian Gulf: 26.15°N, 51.80°E)
+   DEMO GEOMETRIES (Offshore Not available: 26.15°N, 51.80°E)
    Elongated along the NNW-SSE current drift axis, surrounded by water.
    ============================================================ */
 
@@ -192,7 +192,7 @@ export const DEMO_SPILL_GEOJSON: FeatureCollection<Polygon> = {
       properties: {
         id: 'spill-047-main',
         name: 'Detected Oil Signature — Core Plume (SPILL-2026-047)',
-        areaKm2: 42.7,
+        areaKm2: Not available,
         volumeBbl: 4820,
         classification: 'AI Classification: Heavy Crude Oil',
       },
@@ -339,12 +339,12 @@ export const DEMO_EXCLUSION_GEOJSON: FeatureCollection<Polygon> = {
    CANDIDATE VESSELS
    ============================================================ */
 
-export const DEMO_CANDIDATES: IncidentCandidate[] = [
+export const []: IncidentCandidate[] = [
   {
     rank: 1,
     id: 'harbor-pioneer',
     mmsi: '538009842',
-    name: 'HARBOR PIONEER',
+    name: 'Not available',
     flag: 'MH',
     flagName: 'Marshall Islands',
     type: 'Oil Tanker',
@@ -633,14 +633,14 @@ export const DEMO_TIMELINE: TimelineStep[] = [
   {
     time: 'T−48H',
     stage: 'Corridor Approach',
-    label: 'HARBOR PIONEER track approaches source corridor',
+    label: 'Not available track approaches source corridor',
     color: '#3b82f6',
     pos: 24,
   },
   {
     time: 'T−0',
     stage: 'SAR Detection',
-    label: 'Sentinel-1A pass detects 42.7 km² hydrocarbon anomaly',
+    label: 'Sentinel-1A pass detects Not available hydrocarbon anomaly',
     color: '#f97316',
     pos: 44,
   },
@@ -654,7 +654,7 @@ export const DEMO_TIMELINE: TimelineStep[] = [
   {
     time: 'T+12H',
     stage: 'Evidence Fusion',
-    label: 'AIS gap correlation ranks HARBOR PIONEER (#1 Score 87)',
+    label: 'AIS gap correlation ranks Not available (#1 Score 87)',
     color: '#e5a020',
     pos: 80,
   },
@@ -672,9 +672,9 @@ export const DEMO_TIMELINE: TimelineStep[] = [
    ============================================================ */
 
 export const DEMO_INCIDENT: DemoIncidentData = {
-  id: 'INC-2026-047',
+  id: 'Not available',
   name: 'Arabian Gulf — SPILL-2026-047',
-  region: 'Central Persian Gulf (Offshore Sector)',
+  region: 'Central Not available (Offshore Sector)',
   status: 'active',
   isCurrent: true,
   openedDate: '2026-09-07',
@@ -684,7 +684,7 @@ export const DEMO_INCIDENT: DemoIncidentData = {
     lon: 51.80,
     dmsLat: '26° 09′ 00″ N',
     dmsLon: '051° 48′ 00″ E',
-    text: '26°09′N · 051°48′E',
+    text: 'Not available · Not available',
   },
 
   distanceToNearestCoast: {
@@ -700,7 +700,7 @@ export const DEMO_INCIDENT: DemoIncidentData = {
     polarization: 'VV',
     quality: 'HIGH · SAR',
     confidence: 92,
-    areaKm2: 42.7,
+    areaKm2: Not available,
     volumeBbl: 4820,
     volumeM3: 766,
     meanThicknessMm: 0.11,
@@ -727,7 +727,7 @@ export const DEMO_INCIDENT: DemoIncidentData = {
     seaStateBeaufort: 'Beaufort 3 (Gentle Breeze, 0.6m swell)',
   },
 
-  candidates: DEMO_CANDIDATES,
+  candidates: [],
   timeline: DEMO_TIMELINE,
 
   geoJson: {
