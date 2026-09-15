@@ -13,9 +13,10 @@ def generate_corridor_geometry(particles: List[Particle], density_quantile: floa
     Density is calculated via a 2D histogram thresholding to isolate primary clusters.
     """
     valid = [p for p in particles if p.state != 'REJECTED']
+    if len(valid) == 0:
+        raise ValueError("Cannot generate corridor: Particle count is 0.")
     if len(valid) < 3:
-        return CorridorGeometry(density_polygon=GeoPolygon(coordinates=[]), hull_polygon=None)
-        
+        raise ValueError("Cannot generate corridor: Not enough particles (needs >= 3) to form a hull.")
     lons = np.array([p.lon for p in valid])
     lats = np.array([p.lat for p in valid])
     
@@ -26,8 +27,8 @@ def generate_corridor_geometry(particles: List[Particle], density_quantile: floa
         hull_coords = points[hull.vertices].tolist()
         hull_coords.append(hull_coords[0]) # Close the loop
         hull_polygon = GeoPolygon(coordinates=[hull_coords])
-    except Exception:
-        hull_polygon = None
+    except Exception as e:
+        raise RuntimeError(f"Corridor geometry generation failed (ConvexHull error): {e}")
         
     # Density Corridor (2D Histogram)
     try:
@@ -62,13 +63,10 @@ def generate_corridor_geometry(particles: List[Particle], density_quantile: floa
                         density_coords.append(list(geom.exterior.coords))
                 
                 density_polygon = GeoPolygon(coordinates=density_coords)
-            else:
-                density_polygon = GeoPolygon(coordinates=[])
-        else:
-            density_polygon = GeoPolygon(coordinates=[])
+        if not polys:
+            raise RuntimeError("Corridor density geometry is empty.")
             
-    except Exception:
-        # Fallback empty if density generation fails
-        density_polygon = GeoPolygon(coordinates=[])
+    except Exception as e:
+        raise RuntimeError(f"Corridor density generation failed: {e}")
         
     return CorridorGeometry(density_polygon=density_polygon, hull_polygon=hull_polygon)

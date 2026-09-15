@@ -37,19 +37,19 @@ def create_ais_fixture():
     # Transform EPSG:32616 to WGS84 (Lat/Lon) to get reasonable coordinates
     # Center of image: X=289000, Y=3195000
     transformer = Transformer.from_crs("EPSG:32616", "EPSG:4326", always_xy=True)
-    lat_center, lon_center = transformer.transform(289000, 3195000)
+    lon_center, lat_center = transformer.transform(289000, 3195000)
     
     records = []
     
     # Base timestamp 6 hours before the image
     base_time = pd.Timestamp("2019-10-14T18:00:00Z")
     
-    # Vessel A (Spatially/Temporally compatible, intersecting corridor)
+    # Vessel 1
     for i in range(10):
         t = base_time + pd.Timedelta(minutes=i*30)
         records.append({
             "mmsi": "111111111",
-            "ship_name": "VESSEL_A_COMPATIBLE",
+            "ship_name": "DEMO_VESSEL_001",
             "timestamp": t.isoformat(),
             "latitude": lat_center - 0.05 + (i * 0.005),
             "longitude": lon_center - 0.05 + (i * 0.005),
@@ -57,12 +57,12 @@ def create_ais_fixture():
             "heading": 45.0
         })
         
-    # Vessel B (Spatially nearby, weaker temporal - passed through yesterday)
+    # Vessel 2
     for i in range(10):
         t = base_time - pd.Timedelta(hours=24) + pd.Timedelta(minutes=i*30)
         records.append({
             "mmsi": "222222222",
-            "ship_name": "VESSEL_B_WEAK_TEMP",
+            "ship_name": "DEMO_VESSEL_002",
             "timestamp": t.isoformat(),
             "latitude": lat_center - 0.02 + (i * 0.002),
             "longitude": lon_center + 0.02 - (i * 0.002),
@@ -70,12 +70,12 @@ def create_ais_fixture():
             "heading": 315.0
         })
         
-    # Vessel C (Spatially nearby, completely incompatible temporally)
+    # Vessel 3
     for i in range(10):
         t = base_time + pd.Timedelta(days=2) + pd.Timedelta(minutes=i*30)
         records.append({
             "mmsi": "333333333",
-            "ship_name": "VESSEL_C_INCOMPATIBLE",
+            "ship_name": "DEMO_VESSEL_003",
             "timestamp": t.isoformat(),
             "latitude": lat_center,
             "longitude": lon_center,

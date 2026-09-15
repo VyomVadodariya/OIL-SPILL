@@ -1,0 +1,381 @@
+{
+    "detection_id": "b7d41412-3e36-4d63-9a5b-5809fb26838d",
+    "source_type": "VESSEL",
+    "candidates": [
+        {
+            "candidate_id": "e0733e5d-d4e4-4c0a-b0eb-7c120cc1949b",
+            "vessel_identity": {
+                "mmsi": "111111111",
+                "imo": null,
+                "ship_name": "DEMO_VESSEL_001",
+                "callsign": null,
+                "ship_type": null,
+                "draught": null,
+                "length": null,
+                "width": null
+            },
+            "investigation_priority_score": 0.5830112721417069,
+            "evidence_completeness_score": 0.6363636363636364,
+            "supporting_evidence": [
+                {
+                    "evidence_id": "5791ea2c-a457-521e-b98f-7b76b4c214b0",
+                    "candidate_id": "e0733e5d-d4e4-4c0a-b0eb-7c120cc1949b",
+                    "evidence_type": "SPATIAL",
+                    "source_stage": "STAGE_5",
+                    "source_component": "spatial_compatibility",
+                    "observation": {
+                        "min_distance_meters": 0.0,
+                        "corridor_intersections": 9,
+                        "time_of_closest_approach": "2019-10-14 18:00:00+00:00",
+                        "time_spent_in_corridor_seconds": 16200.0
+                    },
+                    "score": 1.0,
+                    "direction": "SUPPORTING",
+                    "weight": 0.2,
+                    "reliability": 0.9,
+                    "uncertainty": 0.09999999999999998,
+                    "availability": true,
+                    "description": "Spatial compatibility (SUPPORTING): Distance decay (radius=50000.0m) & intersection boost",
+                    "provenance": {
+                        "source_stage": "STAGE_5",
+                        "source_component": "spatial_compatibility",
+                        "provider": null,
+                        "data_timestamp": null,
+                        "configuration_version": "1.0",
+                        "git_commit": null
+                    }
+                },
+                {
+                    "evidence_id": "7ab4aa5c-bb3a-5b5e-9bc2-c3b03f81775f",
+                    "candidate_id": "e0733e5d-d4e4-4c0a-b0eb-7c120cc1949b",
+                    "evidence_type": "TEMPORAL",
+                    "source_stage": "STAGE_5",
+                    "source_component": "temporal_compatibility",
+                    "observation": {
+                        "earliest_compatible_observation": "2019-10-14 18:00:00+00:00",
+                        "latest_compatible_observation": "2019-10-14 22:30:00+00:00",
+                        "temporal_overlap_seconds": 16200.0,
+                        "time_difference_from_window_seconds": 0.0,
+                        "source_window_duration_seconds": 86400.0
+                    },
+                    "score": 0.1875,
+                    "direction": "SUPPORTING",
+                    "weight": 0.25,
+                    "reliability": 0.9,
+                    "uncertainty": 0.09999999999999998,
+                    "availability": true,
+                    "description": "Temporal compatibility (SUPPORTING): Proportional overlap with source window duration",
+                    "provenance": {
+                        "source_stage": "STAGE_5",
+                        "source_component": "temporal_compatibility",
+                        "provider": null,
+                        "data_timestamp": null,
+                        "configuration_version": "1.0",
+                        "git_commit": null
+                    }
+                },
+                {
+                    "evidence_id": "8ae4cc49-ebe6-56ae-affd-2e7c59b13909",
+                    "candidate_id": "e0733e5d-d4e4-4c0a-b0eb-7c120cc1949b",
+                    "evidence_type": "AIS_TRACK",
+                    "source_stage": "STAGE_5",
+                    "source_component": "track_quality",
+                    "observation": "Observations: 10",
+                    "score": 1.0,
+                    "direction": "SUPPORTING",
+                    "weight": 0.1,
+                    "reliability": 1.0,
+                    "uncertainty": 0.0,
+                    "availability": true,
+                    "description": "Track quality (1.0): Observation count & gap penalty",
+                    "provenance": {
+                        "source_stage": "STAGE_5",
+                        "source_component": "track_quality",
+                        "provider": null,
+                        "data_timestamp": null,
+                        "configuration_version": "1.0",
+                        "git_commit": null
+                    }
+                },
+                {
+                    "evidence_id": "bf5069e5-f426-5681-afba-fb6255af2877",
+                    "candidate_id": "e0733e5d-d4e4-4c0a-b0eb-7c120cc1949b",
+                    "evidence_type": "VESSEL_IDENTITY",
+                    "source_stage": "STAGE_5",
+                    "source_component": "vessel_identity",
+                    "observation": {
+                        "mmsi": "111111111",
+                        "imo": null,
+                        "ship_name": "DEMO_VESSEL_001",
+                        "callsign": null,
+                        "ship_type": null,
+                        "draught": null,
+                        "length": null,
+                        "width": null
+                    },
+                    "score": 0.5,
+                    "direction": "SUPPORTING",
+                    "weight": 0.0,
+                    "reliability": 1.0,
+                    "uncertainty": 0.0,
+                    "availability": true,
+                    "description": "Identity completeness (0.5): Identity completeness",
+                    "provenance": {
+                        "source_stage": "STAGE_5",
+                        "source_component": "vessel_identity",
+                        "provider": null,
+                        "data_timestamp": null,
+                        "configuration_version": "1.0",
+                        "git_commit": null
+                    }
+                }
+            ],
+            "contradicting_evidence": [],
+            "missing_evidence": [
+                {
+                    "evidence_id": "029af001-28e1-5a60-b066-18ffee3e0c49",
+                    "candidate_id": "e0733e5d-d4e4-4c0a-b0eb-7c120cc1949b",
+                    "evidence_type": "DRIFT",
+                    "source_stage": "STAGE_4",
+                    "source_component": "drift_corridor",
+                    "observation": null,
+                    "score": 0.0,
+                    "direction": "MISSING",
+                    "weight": 0.35,
+                    "reliability": 0.0,
+                    "uncertainty": 1.0,
+                    "availability": false,
+                    "description": "Drift model physics compatibility (MISSING): No independent candidate-level Stage 4 metric available.",
+                    "provenance": {
+                        "source_stage": "STAGE_4",
+                        "source_component": "drift_corridor",
+                        "provider": null,
+                        "data_timestamp": null,
+                        "configuration_version": "1.0",
+                        "git_commit": null
+                    }
+                }
+            ],
+            "all_evidence": [
+                {
+                    "evidence_id": "5791ea2c-a457-521e-b98f-7b76b4c214b0",
+                    "candidate_id": "e0733e5d-d4e4-4c0a-b0eb-7c120cc1949b",
+                    "evidence_type": "SPATIAL",
+                    "source_stage": "STAGE_5",
+                    "source_component": "spatial_compatibility",
+                    "observation": {
+                        "min_distance_meters": 0.0,
+                        "corridor_intersections": 9,
+                        "time_of_closest_approach": "2019-10-14 18:00:00+00:00",
+                        "time_spent_in_corridor_seconds": 16200.0
+                    },
+                    "score": 1.0,
+                    "direction": "SUPPORTING",
+                    "weight": 0.2,
+                    "reliability": 0.9,
+                    "uncertainty": 0.09999999999999998,
+                    "availability": true,
+                    "description": "Spatial compatibility (SUPPORTING): Distance decay (radius=50000.0m) & intersection boost",
+                    "provenance": {
+                        "source_stage": "STAGE_5",
+                        "source_component": "spatial_compatibility",
+                        "provider": null,
+                        "data_timestamp": null,
+                        "configuration_version": "1.0",
+                        "git_commit": null
+                    }
+                },
+                {
+                    "evidence_id": "7ab4aa5c-bb3a-5b5e-9bc2-c3b03f81775f",
+                    "candidate_id": "e0733e5d-d4e4-4c0a-b0eb-7c120cc1949b",
+                    "evidence_type": "TEMPORAL",
+                    "source_stage": "STAGE_5",
+                    "source_component": "temporal_compatibility",
+                    "observation": {
+                        "earliest_compatible_observation": "2019-10-14 18:00:00+00:00",
+                        "latest_compatible_observation": "2019-10-14 22:30:00+00:00",
+                        "temporal_overlap_seconds": 16200.0,
+                        "time_difference_from_window_seconds": 0.0,
+                        "source_window_duration_seconds": 86400.0
+                    },
+                    "score": 0.1875,
+                    "direction": "SUPPORTING",
+                    "weight": 0.25,
+                    "reliability": 0.9,
+                    "uncertainty": 0.09999999999999998,
+                    "availability": true,
+                    "description": "Temporal compatibility (SUPPORTING): Proportional overlap with source window duration",
+                    "provenance": {
+                        "source_stage": "STAGE_5",
+                        "source_component": "temporal_compatibility",
+                        "provider": null,
+                        "data_timestamp": null,
+                        "configuration_version": "1.0",
+                        "git_commit": null
+                    }
+                },
+                {
+                    "evidence_id": "54f8a740-db12-554c-add1-19584544f34f",
+                    "candidate_id": "e0733e5d-d4e4-4c0a-b0eb-7c120cc1949b",
+                    "evidence_type": "BEHAVIOR",
+                    "source_stage": "STAGE_5",
+                    "source_component": "behavior_features",
+                    "observation": {
+                        "mean_speed_knots": null,
+                        "max_speed_knots": null,
+                        "speed_variance": null,
+                        "course_change_count": 0,
+                        "low_speed_duration_seconds": 0.0,
+                        "track_continuity_ratio": 0.18518518518518517,
+                        "observation_density": null
+                    },
+                    "score": 0.1863425925925926,
+                    "direction": "NEUTRAL",
+                    "weight": 0.1,
+                    "reliability": 0.7,
+                    "uncertainty": 0.30000000000000004,
+                    "availability": true,
+                    "description": "Trajectory behavior (NEUTRAL): Behavior compatibility based on observable trajectory (continuity, speed, interaction)",
+                    "provenance": {
+                        "source_stage": "STAGE_5",
+                        "source_component": "behavior_features",
+                        "provider": null,
+                        "data_timestamp": null,
+                        "configuration_version": "1.0",
+                        "git_commit": null
+                    }
+                },
+                {
+                    "evidence_id": "029af001-28e1-5a60-b066-18ffee3e0c49",
+                    "candidate_id": "e0733e5d-d4e4-4c0a-b0eb-7c120cc1949b",
+                    "evidence_type": "DRIFT",
+                    "source_stage": "STAGE_4",
+                    "source_component": "drift_corridor",
+                    "observation": null,
+                    "score": 0.0,
+                    "direction": "MISSING",
+                    "weight": 0.35,
+                    "reliability": 0.0,
+                    "uncertainty": 1.0,
+                    "availability": false,
+                    "description": "Drift model physics compatibility (MISSING): No independent candidate-level Stage 4 metric available.",
+                    "provenance": {
+                        "source_stage": "STAGE_4",
+                        "source_component": "drift_corridor",
+                        "provider": null,
+                        "data_timestamp": null,
+                        "configuration_version": "1.0",
+                        "git_commit": null
+                    }
+                },
+                {
+                    "evidence_id": "8ae4cc49-ebe6-56ae-affd-2e7c59b13909",
+                    "candidate_id": "e0733e5d-d4e4-4c0a-b0eb-7c120cc1949b",
+                    "evidence_type": "AIS_TRACK",
+                    "source_stage": "STAGE_5",
+                    "source_component": "track_quality",
+                    "observation": "Observations: 10",
+                    "score": 1.0,
+                    "direction": "SUPPORTING",
+                    "weight": 0.1,
+                    "reliability": 1.0,
+                    "uncertainty": 0.0,
+                    "availability": true,
+                    "description": "Track quality (1.0): Observation count & gap penalty",
+                    "provenance": {
+                        "source_stage": "STAGE_5",
+                        "source_component": "track_quality",
+                        "provider": null,
+                        "data_timestamp": null,
+                        "configuration_version": "1.0",
+                        "git_commit": null
+                    }
+                },
+                {
+                    "evidence_id": "bf5069e5-f426-5681-afba-fb6255af2877",
+                    "candidate_id": "e0733e5d-d4e4-4c0a-b0eb-7c120cc1949b",
+                    "evidence_type": "VESSEL_IDENTITY",
+                    "source_stage": "STAGE_5",
+                    "source_component": "vessel_identity",
+                    "observation": {
+                        "mmsi": "111111111",
+                        "imo": null,
+                        "ship_name": "DEMO_VESSEL_001",
+                        "callsign": null,
+                        "ship_type": null,
+                        "draught": null,
+                        "length": null,
+                        "width": null
+                    },
+                    "score": 0.5,
+                    "direction": "SUPPORTING",
+                    "weight": 0.0,
+                    "reliability": 1.0,
+                    "uncertainty": 0.0,
+                    "availability": true,
+                    "description": "Identity completeness (0.5): Identity completeness",
+                    "provenance": {
+                        "source_stage": "STAGE_5",
+                        "source_component": "vessel_identity",
+                        "provider": null,
+                        "data_timestamp": null,
+                        "configuration_version": "1.0",
+                        "git_commit": null
+                    }
+                }
+            ],
+            "uncertainty": {
+                "overall_uncertainty": 0.5,
+                "spatial_uncertainty": 0.5,
+                "temporal_uncertainty": 0.0,
+                "drift_uncertainty": 1.0,
+                "ais_uncertainty": 0.0,
+                "identity_uncertainty": 1.0,
+                "data_completeness": 0.6363636363636364
+            },
+            "classification": "MODERATELY_COMPATIBLE",
+            "explanation": {
+                "supporting_evidence": [
+                    "Spatial compatibility (SUPPORTING): Distance decay (radius=50000.0m) & intersection boost",
+                    "Temporal compatibility (SUPPORTING): Proportional overlap with source window duration",
+                    "Track quality (1.0): Observation count & gap penalty",
+                    "Identity completeness (0.5): Identity completeness"
+                ],
+                "contradicting_evidence": [
+                    "No strong contradiction identified."
+                ],
+                "missing_evidence": [
+                    "Drift model physics compatibility (MISSING): No independent candidate-level Stage 4 metric available."
+                ],
+                "uncertainty": [],
+                "interpretation": "Moderately Compatible. Vessel responsibility is not established."
+            },
+            "provenance": {
+                "stage6_version": "1.0",
+                "runtime_metadata": {
+                    "execution_timestamp": "2026-09-15T14:27:30.447366+00:00"
+                }
+            }
+        }
+    ],
+    "spill_uncertainty": {
+        "overall_uncertainty": 0.5,
+        "spatial_uncertainty": 0.5,
+        "temporal_uncertainty": 0.0,
+        "drift_uncertainty": 1.0,
+        "ais_uncertainty": 0.0,
+        "identity_uncertainty": 1.0,
+        "data_completeness": 0.6363636363636364
+    },
+    "provenance": {
+        "stage6": "Engine Execution Complete",
+        "version": "1.0",
+        "input_hashes": {
+            "sar_image": "ab702ce7a0022b0765c76feb8390344286d97ecadad212d2678f1676c5f4b295",
+            "model_checkpoint": "6472610eb197819bfd1700cc66e3f85e3c23c7d0e500c247a6df94b7f10b1fb7",
+            "prediction_mask": "f87294b75957833db3930a7d90b304298e59b1f39fa06a77147dfa88a32d2df1",
+            "ais_fixture": "d1b21363ac40956a37f590dabe0c15eb3bc71e3da5660c02db2c43df10b9dcd7",
+            "environmental_forcing": "b9a5f73d6ced7de8ab5a54b26dda87f46e400e8c651382893c920abf1761ac1f"
+        }
+    }
+}

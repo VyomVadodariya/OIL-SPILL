@@ -3,7 +3,12 @@ import sys
 import json
 import datetime
 from pathlib import Path
+import hashlib
 from pyproj import Transformer
+import rasterio
+import rasterio.features
+from shapely.geometry import shape, Polygon, mapping
+import numpy as np
 
 sys.path.append(os.path.abspath("model_repo"))
 
@@ -23,17 +28,63 @@ from src.ais.candidate import rank_candidate
 from src.ais.schema import VesselCandidate, AISResult, AISResultStatus
 
 def run_investigation():
-    # 1. Load Detection (Mocking Stage 3 for the Golden Scene)
-    poly_geom = {"type": "Polygon", "coordinates": [[[-87.16, 28.87], [-87.15, 28.87], [-87.15, 28.88], [-87.16, 28.88], [-87.16, 28.87]]]}
+    # 1. Load Detection (Mocking Stage 3 for the Golden Scene) -> REPLACED WITH TRUE CHARACTERIZATION
+    mask_path = "data/processed/inference_outputs/20191015_mask.tif"
+    sar_path = "data/raw/sar/test/images/20191015.tif"
+    
+    assert os.path.exists(mask_path), "Golden Demo mask does not exist. Run inference first."
+    assert os.path.exists(sar_path), "Golden Demo SAR scene does not exist."
+    
+    with rasterio.open(sar_path) as src_sar:
+        sar_crs = src_sar.crs
+        sar_width = src_sar.width
+        sar_height = src_sar.height
+        sar_transform = src_sar.transform
+
+    with rasterio.open(mask_path) as src_mask:
+        assert src_mask.width == sar_width, "Mask width does not match SAR width"
+        assert src_mask.height == sar_height, "Mask height does not match SAR height"
+        assert src_mask.crs == sar_crs, "Mask CRS does not match SAR CRS"
+        
+        mask_data = src_mask.read(1)
+        shapes_gen = rasterio.features.shapes(mask_data, mask=mask_data > 0, transform=src_mask.transform)
+        
+        largest_geom = None
+        max_area = -1.0
+        
+        for geom_dict, val in shapes_gen:
+            geom = shape(geom_dict)
+            if geom.area > max_area:
+                max_area = geom.area
+                largest_geom = geom
+                
+    assert largest_geom is not None, "Extracted polygon is empty!"
+    assert largest_geom.is_valid, "Extracted polygon is invalid!"
+    
+    # Calculate area in km2. (Assuming UTM so coordinates are in meters)
+    area_km2 = max_area / 1_000_000.0
+    
+    centroid = largest_geom.centroid
+    
+    # Coordinates in geometry are currently in UTM, need to convert to Lat/Lon for GeoCentroid/Polygon output?
+    # Wait, if we use GeoCentroid we might want lat/lon. Let's see what the drift simulation expects.
+    # Drift is usually configured for lat/lon, but let's just convert the centroid for GeoCentroid.
+    from rasterio.warp import transform_geom
+    geom_wgs84 = transform_geom(sar_crs, 'EPSG:4326', mapping(largest_geom))
+    centroid_wgs84 = shape(geom_wgs84).centroid
+    
+    assert -90 <= centroid_wgs84.y <= 90, "Centroid latitude is geographically invalid"
+    assert -180 <= centroid_wgs84.x <= 180, "Centroid longitude is geographically invalid"
+    
     import uuid
     from src.characterization.schema import GeoCentroid
     detection = SpillDetection(
         detection_id=uuid.uuid4(),
         source_scene_id="GOLDEN_20191015",
         acquisition_timestamp=datetime.datetime(2019, 10, 15, tzinfo=datetime.timezone.utc),
-        geo_centroid=GeoCentroid(longitude=-87.16, latitude=28.87),
-        area_km2=5.0,
-        geometry=poly_geom
+        geo_centroid=GeoCentroid(longitude=centroid_wgs84.x, latitude=centroid_wgs84.y),
+        area_km2=area_km2,
+        geometry=geom_wgs84
     )
     
     # 2. Environmental Forcing (from fixture)
@@ -52,17 +103,19 @@ def run_investigation():
     params = DriftModelParameters(timestep_seconds=3600, integration_method="EULER", windage_range=(0.02, 0.04), diffusion_coef_m2_s=10.0)
     drift_sim = DriftSimulation(env, params, random_seed=42)
     
-    particles = drift_sim.initialize_particles(100, geometry=poly_geom)
+    particles = drift_sim.initialize_particles(100, geometry=geom_wgs84)
     drift_sim.run_simulation(particles, start_time=detection.acquisition_timestamp, duration_hours=24, is_backward=True)
     
     corridor = generate_corridor_geometry(particles)
+    
+    # Fail-fast check for Golden Demo
+    assert corridor is not None, "Drift corridor generation failed!"
+    assert len(corridor.hull_polygon.coordinates) > 0, "Drift corridor hull polygon is empty!"
+    
     drift_result = DriftResult(
         detection_id=detection.detection_id,
         status=DriftStatus.SUCCESS,
-        source_corridor=CorridorGeometry(
-            density_polygon=GeoPolygon(coordinates=[]),
-            hull_polygon=GeoPolygon(coordinates=[])
-        ),
+        source_corridor=corridor,
         temporal_window=TemporalWindow(
             simulation_start=detection.acquisition_timestamp - datetime.timedelta(hours=24),
             simulation_end=detection.acquisition_timestamp,
@@ -122,14 +175,42 @@ def run_investigation():
         print(f"  Priority Score: {candidate.investigation_priority_score:.2f}")
         print(f"  Classification: {candidate.classification.value}")
         
+    # Hash inputs for provenance
+    def compute_sha256(filepath):
+        sha256_hash = hashlib.sha256()
+        try:
+            with open(filepath, "rb") as f:
+                for byte_block in iter(lambda: f.read(4096), b""):
+                    sha256_hash.update(byte_block)
+            return sha256_hash.hexdigest()
+        except:
+            return None
+
+    # Embed hashes in final_result provenance
+    final_result.provenance["input_hashes"] = {
+        "sar_image": compute_sha256("data/raw/sar/test/images/20191015.tif"),
+        "model_checkpoint": compute_sha256("models/best_model.pth"),
+        "prediction_mask": compute_sha256("data/processed/inference_outputs/20191015_mask.tif"),
+        "ais_fixture": compute_sha256("data/demo_case/ais/fixture.csv"),
+        "environmental_forcing": compute_sha256("data/demo_case/environmental/forcing.json")
+    }
+    
     # Save output for frontend
     out_dir = Path("data/demo_case/investigation")
     out_dir.mkdir(parents=True, exist_ok=True)
     import dataclasses
+    
+    result_dict = dataclasses.asdict(final_result)
     with open(out_dir / "result.json", "w") as f:
-        json.dump(dataclasses.asdict(final_result), f, default=str, indent=4)
+        json.dump(result_dict, f, default=str, indent=4)
         
-    print("\nInvestigation complete. Ready for UI.")
+    # Copy to public folder for React dev server
+    public_dir = Path("public")
+    public_dir.mkdir(parents=True, exist_ok=True)
+    with open(public_dir / "result.json", "w") as f:
+        json.dump(result_dict, f, default=str, indent=4)
+        
+    print("\nInvestigation complete. Ready for UI. (Output saved to data/demo_case/investigation/result.json and public/result.json)")
 
 if __name__ == "__main__":
     run_investigation()

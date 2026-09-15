@@ -31,8 +31,6 @@ interface Vessel extends InvVesselMark {
   aisContinuity?: 'high' | 'moderate' | 'low';
 }
 
-const VESSELS: Vessel[] = DEMO_CANDIDATES as unknown as Vessel[];
-
 /* Layer config */
 const MAP_LAYERS = [
   { id: 'sar',        label: 'SAR Scene',        color: '#00b4d8' },
@@ -184,12 +182,12 @@ const RightPanel: React.FC<RightPanelProps> = ({ vessel }) => {
     <div className="inv-right-panel" role="complementary" aria-label="Investigation intelligence panel">
       {/* Header */}
       <div className="inv-panel-header">
-        <span className="inv-panel-title">Investigation · INC-2026-047</span>
+        <span className="inv-panel-title">Investigation · Golden Demo</span>
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '8px' }}>
           <DataStatusBadge status="SAR: REAL — SENTINEL-1" />
-          <DataStatusBadge status="MODEL: TRAINED" />
-          <DataStatusBadge status="ENVIRONMENT: DEMO ENVIRONMENTAL FORCING" />
-          <DataStatusBadge status="AIS: SYNTHETIC DEMO" />
+          <DataStatusBadge status="MODEL: TRAINED — VERIFIED CHECKPOINT" />
+          <DataStatusBadge status="ENVIRONMENT: SYNTHETIC DEMO FORCING" />
+          <DataStatusBadge status="AIS: SYNTHETIC DEMO TELEMETRY" />
         </div>
       </div>
 
@@ -381,7 +379,7 @@ const Timeline: React.FC<TimelineProps> = ({ stages, activeStageId, onStageClick
       {/* Header */}
       <div className="inv-timeline-header">
         <span className="inv-timeline-label">
-          Investigation Pipeline · INC-2026-047
+          Investigation Pipeline · Golden Demo
         </span>
         <span className="inv-timeline-step-count">
           {doneCount}/{stages.length} stages complete
@@ -466,19 +464,51 @@ const VTooltip: React.FC<{ vessel: Vessel }> = ({ vessel }) => (
    ============================================================ */
 
 export const Investigations: React.FC = () => {
-  /* Default: show HARBOR PIONEER (highest-ranked) in the panel */
-  const [selectedVesselId, setSelectedVesselId] = useState<string>('harbor-pioneer');
+  const [vessels, setVessels] = useState<Vessel[]>([]);
+  const [selectedVesselId, setSelectedVesselId] = useState<string>('');
   const [hoveredVesselId, setHoveredVesselId]   = useState<string | null>(null);
   const [tooltipPos, setTooltipPos]   = useState({ x: 0, y: 0 });
-  const [activeStageId, setActiveStageId] = useState<string>('s8');  /* Evidence Analysis — active */
+  const [activeStageId, setActiveStageId] = useState<string>('s8');
   const [activeLayers, setActiveLayers] = useState<Set<string>>(
     () => new Set(MAP_LAYERS.map(l => l.id))
   );
 
   const mapAreaRef = useRef<HTMLDivElement>(null);
 
-  const selectedVessel = VESSELS.find(v => v.id === selectedVesselId) ?? VESSELS[0];
-  const hoveredVessel  = VESSELS.find(v => v.id === hoveredVesselId) ?? null;
+  React.useEffect(() => {
+    fetch('/result.json')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.candidates) {
+          const mappedVessels: Vessel[] = data.candidates.map((c: any, index: number) => ({
+            id: c.candidate_id,
+            name: c.vessel_identity?.ship_name || `UNKNOWN VESSEL ${index+1}`,
+            mmsi: c.vessel_identity?.mmsi || 'N/A',
+            status: index === 0 ? 'highest-ranked' : 'under-review',
+            type: c.vessel_identity?.ship_type || 'Unknown Type',
+            flag: 'N/A', flagName: 'N/A', dwt: 'N/A',
+            lat: 28.85, lon: -89.15, // Dummy map placement, ideally from track
+            heading: 0, speed: 0,
+            lastAis: 'N/A',
+            invScore: Math.round(c.investigation_priority_score * 100),
+            spatialScore: Math.round((c.all_evidence.find((e:any)=>e.evidence_type==='SPATIAL')?.score || 0) * 100),
+            temporalScore: Math.round((c.all_evidence.find((e:any)=>e.evidence_type==='TEMPORAL')?.score || 0) * 100),
+            driftScore: Math.round((c.all_evidence.find((e:any)=>e.evidence_type==='DRIFT')?.score || 0) * 100),
+            aisContinuity: 'moderate',
+            aisGap: false,
+            trackPath: ''
+          }));
+          setVessels(mappedVessels);
+          if (mappedVessels.length > 0) {
+            setSelectedVesselId(mappedVessels[0].id);
+          }
+        }
+      })
+      .catch(err => console.error("Could not load backend result.json", err));
+  }, []);
+
+  const selectedVessel = vessels.find(v => v.id === selectedVesselId) ?? vessels[0];
+  const hoveredVessel  = vessels.find(v => v.id === hoveredVesselId) ?? null;
 
   const toggleLayer = useCallback((id: string) => {
     setActiveLayers(prev => {
@@ -501,11 +531,15 @@ export const Investigations: React.FC = () => {
   const handleVesselLeave = useCallback(() => setHoveredVesselId(null), []);
 
   /* Narrow InvVesselMark for map component */
-  const vesselMarks: InvVesselMark[] = VESSELS.map(v => ({
+  const vesselMarks: InvVesselMark[] = vessels.map(v => ({
     id: v.id, name: v.name, status: v.status as VesselStatus,
     lat: v.lat, lon: v.lon, heading: v.heading, speed: v.speed,
     aisGap: v.aisGap, trackPath: v.trackPath,
   }));
+
+  if (!selectedVessel) {
+    return <div style={{color: 'white', padding: '2rem'}}>Loading Investigation Result...</div>;
+  }
 
   return (
     <div className="inv-container" role="main" aria-label="OceanIntel Investigation Dashboard">
