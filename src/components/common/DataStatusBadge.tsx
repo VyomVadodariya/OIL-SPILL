@@ -11,21 +11,7 @@ import {
 } from 'lucide-react';
 import './DataStatusBadge.css';
 
-export type DataStatusType =
-  | 'IMPLEMENTED'
-  | 'VALIDATED'
-  | 'DEMO MODE'
-  | 'SIMULATED DATA'
-  | 'DEMO MODE · SIMULATED DATA'
-  | 'DEMO SAR · SIMULATED DATA'
-  | 'DEMO ROUTE · SIMULATED'
-  | 'MODEL PREVIEW'
-  | 'PLANNED MODULE'
-  | 'NOT IMPLEMENTED'
-  | 'EXTERNAL DATA REQUIRED'
-  | 'PROJECT EVALUATION RESULTS'
-  | 'DEMO / PLANNED BENCHMARKS'
-  | 'HISTORICAL DEMONSTRATION MODE';
+export type DataStatusType = string;
 
 interface DataStatusBadgeProps {
   status: DataStatusType;

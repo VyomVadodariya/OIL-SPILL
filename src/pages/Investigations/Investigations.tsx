@@ -185,7 +185,12 @@ const RightPanel: React.FC<RightPanelProps> = ({ vessel }) => {
       {/* Header */}
       <div className="inv-panel-header">
         <span className="inv-panel-title">Investigation · INC-2026-047</span>
-        <DataStatusBadge status="DEMO MODE · SIMULATED DATA" />
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '8px' }}>
+          <DataStatusBadge status="SAR: REAL — SENTINEL-1" />
+          <DataStatusBadge status="MODEL: TRAINED" />
+          <DataStatusBadge status="ENVIRONMENT: DEMO ENVIRONMENTAL FORCING" />
+          <DataStatusBadge status="AIS: SYNTHETIC DEMO" />
+        </div>
       </div>
 
       <div className="inv-panel-body">

@@ -1,5 +1,5 @@
 model:
-  path: "../models/best_model.pth"
+  path: "models/best_model.pth"
   encoder_name: "resnet34"
   in_channels: 1
   classes: 1
